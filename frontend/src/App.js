@@ -1,4 +1,3 @@
-
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
@@ -16,9 +15,12 @@ const AuthRoutes = () => {
 };
 
 function App() {
-    const login = false;
+    const token = localStorage.getItem("token");
+
     return (
-        <BrowserRouter>{login ? <Mainscreen /> : <AuthRoutes />}</BrowserRouter>
+        <BrowserRouter>
+            {token !== null ? <Mainscreen /> : <AuthRoutes />}
+        </BrowserRouter>
     );
 }
 

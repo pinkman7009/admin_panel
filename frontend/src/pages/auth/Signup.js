@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import Navbar from "../../components/authcomponents/Navbar";
 import "../../styles/Login.css";
+import { register } from "../../actions/registerAction";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
+    const dispatch = useDispatch();
+
     const [form, setForm] = useState({
         firstname: "",
         lastname: "",
         email: "",
         password: "",
+        role: 0,
     });
 
     const { firstname, lastname, email, password } = form;
@@ -18,6 +23,7 @@ const Signup = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        dispatch(register(form));
     };
 
     return (
