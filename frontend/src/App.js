@@ -21,10 +21,13 @@ const AuthRoutes = () => {
 };
 
 function App() {
-  const login = true;
-  return (
-    <BrowserRouter>{login ? <Mainscreen /> : <AuthRoutes />}</BrowserRouter>
-  );
+    const token = localStorage.getItem("token");
+
+    return (
+        <BrowserRouter>
+            {token !== null ? <Mainscreen /> : <AuthRoutes />}
+        </BrowserRouter>
+    );
 }
 
 export default App;

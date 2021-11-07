@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import Navbar from "../../components/authcomponents/Navbar";
 import "../../styles/Login.css";
+import { login } from "../../actions/loginAction";
+import { useDispatch } from "react-redux";
+import { useMatch } from "react-router";
 
-const Login = () => {
+const Login = (props) => {
+    const dispatch = useDispatch();
+
+    const navigate = useMatch();
+
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -11,18 +18,20 @@ const Login = () => {
     const { email, password } = form;
 
     const onChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.name });
+        setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
+        dispatch(login(form));
+        navigate("/dashboard");
     };
 
     return (
         <div className="head">
             <Navbar />
 
-            <form className="box" onSubmit={onSubmit}>
+            <form className="box">
                 <h1>Log In</h1>
                 <div className="head-box">
                     <div className="subbox">
@@ -48,7 +57,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="subbox-button">
-                        <button className="" type="submit">
+                        <button className="" type="submit" onClick={onSubmit}>
                             Log In
                         </button>
                     </div>
