@@ -1,0 +1,29 @@
+.links-wrapper{
+    display: flex;
+    flex-direction: column;
+    background: #0F1975;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    width: 15%;
+    font-weight: bold;
+}
+.active{
+    background: #1d2aa7;
+}
+.links-wrapper > a{
+    color: white;
+    text-decoration: none;
+}
+.link-group {
+    display: flex;
+    align-items: center;
+    transition:  all 0.3s ease;
+    padding: 0.5rem;
+}
+.link-group svg{
+    margin-right: 1rem;
+}
+.link-group:hover{
+    background: #1d2aa7;
+}
