@@ -16,6 +16,7 @@
 
 .category-item {
   border: 1px solid #0f1975;
+  background: rgb(208, 220, 231);
   border-radius: 5px;
   padding: 0.5rem;
   margin: 1rem;
