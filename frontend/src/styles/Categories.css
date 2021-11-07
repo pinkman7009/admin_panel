@@ -1,0 +1,16 @@
+.categories-container{
+    padding: 1rem;
+}
+
+.categories-list{
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.categories-list-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
