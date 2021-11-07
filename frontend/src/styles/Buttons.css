@@ -1,13 +1,29 @@
-.add-button{
-    background: #0F1975;
-    border-radius: 5px;
-    color: #fff;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    width: 150px;
+.add-button {
+  background: #0f1975;
+  border-radius: 5px;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  min-width: 150px;
+}
+.save-button {
+  background: green;
+  border-radius: 5px;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  min-width: 50px;
+}
+.add-button svg {
+  margin-right: 1rem;
 }

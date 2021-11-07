@@ -1,18 +1,14 @@
-import React from 'react'
+import React from "react";
+import CategoryItem from "./CategoryItem";
 
-const CategoriesList = ({categories}) => {
-    return (
-        <div>
-            list of categories
-            {/* {categories.map(item => {
-                return (
-                    <div>
-                        {item.name}
-                    </div>
-                )
-            })} */}
-        </div>
-    )
-}
+const CategoriesList = ({ categories }) => {
+  return (
+    <div>
+      {categories.map((item) => {
+        return <CategoryItem key={item.id} category={item} />;
+      })}
+    </div>
+  );
+};
 
-export default CategoriesList
+export default CategoriesList;
