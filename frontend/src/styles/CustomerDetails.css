@@ -1,0 +1,42 @@
+.cd-container {
+  padding: 1rem;
+}
+.cd-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cd-stats-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem;
+  width: 20vw;
+  height: 200px;
+}
+.cd-stats-item h3 {
+  color: #0f1975;
+}
+.cd-stats-item p {
+  color: green;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.cd-table {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 60vw;
+  min-height: 200px;
+}
+.cd-table-headers {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.cd-table-records {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

@@ -1,12 +1,59 @@
-import React from 'react'
+import React from "react";
+import "../../../styles/CustomerDetails.css";
+import CustomerDetailsList from "./CustomerDetailsList";
 
 const CustomerDetailsSection = () => {
-    return (
-        <div>
-            <h1>This is Customer Details Section</h1>
-            
+  const customerDetails = [
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@gmail.com",
+      phone: "+91-1234567890",
+    },
+    {
+      id: 2,
+      name: "John Doe",
+      email: "john@gmail.com",
+      phone: "+91-1234567890",
+    },
+    {
+      id: 3,
+      name: "John Doe",
+      email: "john@gmail.com",
+      phone: "+91-1234567890",
+    },
+    {
+      id: 4,
+      name: "John Doe",
+      email: "john@gmail.com",
+      phone: "+91-1234567890",
+    },
+    {
+      id: 5,
+      name: "John Doe",
+      email: "john@gmail.com",
+      phone: "+91-1234567890",
+    },
+  ];
+  return (
+    <div className="cd-container">
+      <div className="cd-stats">
+        <div className="cd-stats-item">
+          <h3>Total Users</h3>
+          <p>3400</p>
         </div>
-    )
-}
+        <div className="cd-stats-item">
+          <h3>New Users</h3>
+          <p>500</p>
+        </div>
+        <div className="cd-stats-item">
+          <h3>Active Users</h3>
+          <p>2000</p>
+        </div>
+      </div>
+      <CustomerDetailsList customers={customerDetails} />
+    </div>
+  );
+};
 
-export default CustomerDetailsSection
+export default CustomerDetailsSection;

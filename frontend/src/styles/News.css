@@ -1,0 +1,22 @@
+.news-container {
+  padding: 1rem;
+}
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  margin: 2rem;
+}
+.news-item {
+  background: rgb(208, 220, 231);
+  padding: 1rem;
+  border-radius: 5px;
+}
