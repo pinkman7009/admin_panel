@@ -7,14 +7,14 @@ const AuthRoutes = () => {
   return (
     <>
       <Routes>
-        <Route exact path="/login" element={Login} />
-        <Route exact path="/signup" element={Signup} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
       </Routes>
     </>
   );
 };
 function App() {
-  const login = true;
+  const login = false;
   return (
     <BrowserRouter>{login ? <Mainscreen /> : <AuthRoutes />}</BrowserRouter>
   );
