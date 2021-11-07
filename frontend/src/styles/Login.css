@@ -1,0 +1,36 @@
+.head {
+    background: rgb(232, 241, 255);
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 93vh;
+}
+.headbox {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.subbox-button {
+    display: flex;
+    justify-content: center;
+}
+
+.subbox input {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 2rem;
+    width: 21rem;
+}
+
+.subbox-button button {
+    height: 2rem;
+    width: 10rem;
+    margin-top: 3rem;
+    margin-bottom: 8rem;
+    background-color: #1d2aa7;
+    color: white;
+}
