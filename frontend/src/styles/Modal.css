@@ -1,0 +1,20 @@
+.modal-container {
+  height: 50vh;
+  width: 50vw;
+  background: #fff;
+  border-radius: 5px;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-wrapper {
+  position: relative;
+}
+.modal-wrapper svg {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
