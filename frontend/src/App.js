@@ -4,6 +4,7 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Mainscreen from "./pages/dashboard/Mainscreen";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const AuthRoutes = () => {
   const navigate = useNavigate();
@@ -21,13 +22,13 @@ const AuthRoutes = () => {
 };
 
 function App() {
-    const token = localStorage.getItem("token");
+  const state = useSelector((state) => state);
 
-    return (
-        <BrowserRouter>
-            {token !== null ? <Mainscreen /> : <AuthRoutes />}
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      {state.token !== null ? <Mainscreen /> : <AuthRoutes />}
+    </BrowserRouter>
+  );
 }
 
 export default App;
