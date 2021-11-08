@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
 
-const CategoriesSchema = mongoose.Schema({
+const PlansSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
-    value: {
+    name: {
         type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
         required: true,
     },
     date: {
@@ -15,4 +19,4 @@ const CategoriesSchema = mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Categories", CategoriesSchema);
+module.exports = mongoose.model("Plan", PlansSchema);

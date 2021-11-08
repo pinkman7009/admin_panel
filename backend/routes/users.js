@@ -4,8 +4,9 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
     try {
         const users = await User.find()
             .sort({

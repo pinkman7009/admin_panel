@@ -1,18 +1,20 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const route = express.Router();
+const SubCategories = require("../models/SubCategories");
 const User = require("../models/User");
-const Categories = require("../models/Categories");
 const auth = require("../middleware/auth");
 
 route.get("/", auth, async (req, res) => {
     try {
-        const categories = await Categories.find({
-            user: req.user.id,
+        const { id } = req.body;
+
+        const subcategories = await SubCategories.find({
+            categories: id,
         }).sort({
             date: -1,
         });
-        res.json(categories);
+        res.json(subcategories);
     } catch (err) {
         console.error(err.message);
         res.status(500).send("server error");
@@ -25,7 +27,7 @@ route.post("/", auth, [body("value").not().isEmpty()], async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { value } = req.body;
+    const { value, category } = req.body;
 
     try {
         const user = await User.findById(req.user.id).select("-password");
@@ -40,14 +42,14 @@ route.post("/", auth, [body("value").not().isEmpty()], async (req, res) => {
             return res.status(401).json({ msg: "Not Authorised" });
         }
 
-        const category = new Categories({
+        const subcategory = new SubCategories({
             value,
-            user: req.user.id,
+            category,
         });
 
-        await category.save();
+        await subcategory.save();
 
-        res.status(200).json({ msg: "Category Saved" });
+        res.status(200).json({ msg: "SubCategory Saved" });
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ msg: err.message });
