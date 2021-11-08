@@ -1,36 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../styles/News.css";
 import AddButton from "../buttons/AddButton";
 import SaveButton from "../buttons/SaveButton";
 import { useDispatch } from "react-redux";
-import { OPEN_MODAL } from "../../../types/modalTypes";
+import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
 import NewsList from "./NewsList";
+import { addNews } from "../../../actions/newsAction";
 
-const NewsSection = () => {
+const ModalBody = () => {
+  const dispatch = useDispatch();
+
+  const [form, setForm] = useState({});
+
+  const { title, desc, image } = form;
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addNews(form));
+    dispatch({ type: CLOSE_MODAL });
   };
-  const modalBody = () => {
-    return (
-      <>
-        <input type="text" placeholder="Enter title" className="modal-input" />
-        <input type="text" placeholder="Enter URL" className="modal-input" />
-        <input
-          type="text"
-          placeholder="Enter description"
-          className="modal-input"
-        />
 
-        <SaveButton handleClick={handleSubmit} />
-      </>
-    );
-  };
+  return (
+    <>
+      <input
+        name="title"
+        type="text"
+        placeholder="Enter title"
+        className="modal-input"
+        onChange={handleChange}
+        value={title}
+      />
+      <input
+        name="image"
+        type="text"
+        placeholder="Enter URL"
+        className="modal-input"
+        onChange={handleChange}
+        value={image}
+      />
+      <input
+        name="desc"
+        type="text"
+        placeholder="Enter description"
+        className="modal-input"
+        onChange={handleChange}
+        value={desc}
+      />
+
+      <SaveButton handleClick={handleSubmit} />
+    </>
+  );
+};
+
+const NewsSection = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch({
       type: OPEN_MODAL,
-      payload: { title: "Add News", body: modalBody },
+      payload: { title: "Add News", body: ModalBody },
     });
   };
   return (

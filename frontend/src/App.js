@@ -5,6 +5,7 @@ import Signup from "./pages/auth/Signup";
 import Mainscreen from "./pages/dashboard/Mainscreen";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import setAuthToken from "./utils/setAuthToken";
 
 const AuthRoutes = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const AuthRoutes = () => {
 
 function App() {
   const state = useSelector((state) => state);
+
+  if (state.token) setAuthToken(state.token);
 
   return (
     <BrowserRouter>

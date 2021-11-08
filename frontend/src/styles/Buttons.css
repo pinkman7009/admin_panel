@@ -39,6 +39,7 @@
   cursor: pointer;
   min-width: 100px;
   margin: 1rem 0;
+  margin-right: 1rem;
 }
 .add-button svg {
   margin-right: 1rem;
