@@ -1,42 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../../styles/News.css";
 import ViewButton from "../buttons/ViewButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getNews } from "../../../actions/newsAction";
 
 const NewsList = () => {
-  const newsList = [
-    {
-      id: 1,
-      title: "News Title",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae",
-    },
-    {
-      id: 2,
-      title: "News Title",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae",
-    },
-    {
-      id: 3,
-      title: "News Title",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae",
-    },
-    {
-      id: 4,
-      title: "News Title",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. MolestiaeLorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae",
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(getNews());
+  }, []);
   return (
     <div className="news-list">
-      {newsList.map((item) => {
+      {state.news?.map((item) => {
         return (
           <div key={item.id} className="news-item">
             <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <ViewButton />
+            <p>{item.desc}</p>
+            <ViewButton text="View" />
           </div>
         );
       })}

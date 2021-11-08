@@ -1,10 +1,10 @@
 import React from "react";
 import "../../../styles/Buttons.css";
 
-const ViewButton = ({ handleClick }) => {
+const ViewButton = ({ text, handleClick }) => {
   return (
     <button className="view-button" onClick={handleClick}>
-      View
+      {text}
     </button>
   );
 };

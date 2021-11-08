@@ -1,4 +1,9 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "../types/AuthTypes";
+import {
+  GET_USER_DETAILS,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT,
+} from "../types/AuthTypes";
 
 export const login = (user = localStorage.getItem("token"), action) => {
   switch (action.type) {
@@ -10,6 +15,15 @@ export const login = (user = localStorage.getItem("token"), action) => {
       localStorage.removeItem("token");
       return null;
 
+    default:
+      return user;
+  }
+};
+
+export const getUserDetails = (user = null, action) => {
+  switch (action.type) {
+    case GET_USER_DETAILS:
+      return action.payload;
     default:
       return user;
   }
