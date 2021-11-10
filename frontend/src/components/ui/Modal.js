@@ -17,7 +17,7 @@ const Modal = ({ title, body }) => {
           <GrClose />
         </div>
         <h3 className="modal-title">{title}</h3>
-        {body()}
+        {body}
       </div>
     </div>
   );
