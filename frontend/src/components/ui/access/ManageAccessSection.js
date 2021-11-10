@@ -79,7 +79,7 @@ const ManageAccessSection = () => {
   const handleClick = () => {
     dispatch({
       type: OPEN_MODAL,
-      payload: { title: "Add Role", body: ModalBody },
+      payload: { title: "Add Role", body: <ModalBody /> },
     });
   };
   return (

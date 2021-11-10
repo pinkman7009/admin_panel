@@ -61,7 +61,7 @@ const NewsSection = () => {
   const handleClick = () => {
     dispatch({
       type: OPEN_MODAL,
-      payload: { title: "Add News", body: ModalBody },
+      payload: { title: "Add News", body: <ModalBody /> },
     });
   };
   return (

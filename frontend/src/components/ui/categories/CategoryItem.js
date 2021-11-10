@@ -6,31 +6,18 @@ import SubCategories from "./SubCategories";
 const CategoryItem = ({ category }) => {
   const [showSub, setShowSub] = useState(false);
 
-  const subcategories = [
-    {
-      id: 1,
-      title: "Subcategory 1",
-    },
-    {
-      id: 2,
-      title: "Subcategory 2",
-    },
-    {
-      id: 3,
-      title: "Subcategory 3",
-    },
-    {
-      id: 4,
-      title: "Subcategory 4",
-    },
-  ];
   return (
     <>
       <div className="category-item">
-        {category.title}
+        {category.value}
         <AiFillCaretDown onClick={() => setShowSub(!showSub)} />
       </div>
-      {showSub ? <SubCategories subcategories={subcategories} /> : null}
+      {showSub ? (
+        <SubCategories
+          id={category._id}
+          subcategories={category.subcategories}
+        />
+      ) : null}
     </>
   );
 };
