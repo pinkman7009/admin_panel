@@ -4,13 +4,17 @@ import "../../../styles/Categories.css";
 const SubCategoriesList = ({ subcategories }) => {
   return (
     <div>
-      {subcategories.map((item) => {
-        return (
-          <div key={item.id} className="subcategory-item">
-            {item.title}
-          </div>
-        );
-      })}
+      {subcategories.length === 0 ? (
+        <p>No subcategories added yet</p>
+      ) : (
+        subcategories?.map((item) => {
+          return (
+            <div key={item._id} className="subcategory-item">
+              {item.value}
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };
