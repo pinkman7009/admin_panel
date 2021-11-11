@@ -7,9 +7,13 @@ const auth = require("../middleware/auth");
 
 route.get("/", auth, async (req, res) => {
     try {
-        const news = await News.find({
-            user: req.user.id,
-        }).sort({
+        const user = await User.findById(req.user.id).select("-password");
+
+        if (!user) {
+            return res.status(400).json({ msg: "User not found" });
+        }
+
+        const news = await News.find().sort({
             date: -1,
         });
         res.json(news);
