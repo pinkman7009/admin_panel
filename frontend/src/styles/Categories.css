@@ -1,39 +1,40 @@
 .categories-container {
-  padding: 1rem;
+    padding: 1rem;
 }
 
 .categories-list {
-  background: #fff;
-  border-radius: 10px;
-  padding: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
 }
 
 .categories-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .category-item {
-  border: 1px solid #0f1975;
-  background: rgb(208, 220, 231);
-  border-radius: 5px;
-  padding: 0.5rem;
-  margin: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    border: 1px solid #0f1975;
+    background: rgb(208, 220, 231);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
 }
 
 .category-item svg {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .subcategory-container {
-  width: 70%;
-  margin: 0 auto;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .subcategory-item {
-  margin: 1rem 0;
+    margin: 1rem 0;
 }

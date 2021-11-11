@@ -7,62 +7,56 @@ const SubCategories = require("../models/SubCategories");
 const auth = require("../middleware/auth");
 
 route.get("/", auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
+    try {
+        const user = await User.findById(req.user.id).select("-password");
 
-    if (!user) {
-      return res.status(400).json({ msg: "User not found" });
+        if (!user) {
+            return res.status(400).json({ msg: "User not found" });
+        }
+
+        const categories = await Categories.find().sort({
+            date: -1,
+        });
+        // console.log(categories);
+        res.json(categories);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("server error");
     }
-
-    const role = user.role;
-
-    if (role !== 0) {
-      return res.status(401).json({ msg: "Not Authorised" });
-    }
-
-    const categories = await Categories.find().sort({
-      date: -1,
-    });
-    // console.log(categories);
-    res.json(categories);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("server error");
-  }
 });
 
 route.post("/", auth, [body("value").not().isEmpty()], async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { value } = req.body;
-
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-
-    if (!user) {
-      return res.status(400).json({ msg: "User not found" });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
     }
 
-    const role = user.role;
+    const { value } = req.body;
 
-    if (role !== 0) {
-      return res.status(401).json({ msg: "Not Authorised" });
+    try {
+        const user = await User.findById(req.user.id).select("-password");
+
+        if (!user) {
+            return res.status(400).json({ msg: "User not found" });
+        }
+
+        const role = user.role;
+
+        if (role !== 0) {
+            return res.status(401).json({ msg: "Not Authorised" });
+        }
+
+        const category = new Categories({
+            value,
+        });
+
+        await category.save();
+
+        res.status(200).json({ msg: "Category Saved" });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ msg: err.message });
     }
-
-    const category = new Categories({
-      value,
-    });
-
-    await category.save();
-
-    res.status(200).json({ msg: "Category Saved" });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ msg: err.message });
-  }
 });
 
 module.exports = route;
