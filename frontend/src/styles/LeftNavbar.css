@@ -7,6 +7,7 @@
   top: 0;
   width: 15%;
   font-weight: bold;
+  min-height: 100vh;
 }
 .active {
   background: #1d2aa7;

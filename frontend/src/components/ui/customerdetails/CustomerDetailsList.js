@@ -1,28 +1,9 @@
 import React from "react";
+import ViewButton from "../buttons/ViewButton";
+import DeleteButton from "../buttons/DeleteButton";
 
 const CustomerDetailsList = ({ customers }) => {
   return (
-    // <div className="cd-table">
-    //   <div className="cd-table-headers">
-    //     <h3>ID</h3>
-    //     <h3>First Name</h3>
-    //     <h3>Last Name</h3>
-    //     <h3>Email</h3>
-    //     <h3>Phone</h3>
-    //   </div>
-    //   {customers.map((item) => {
-    //     return (
-    //       <div className="cd-table-records">
-    //         <p>{item.id}</p>
-    //         <p>{item.firstname}</p>
-    //         <p>{item.lastname}</p>
-    //         <p>{item.email}</p>
-    //         <p>{item.phone}</p>
-    //       </div>
-    //     );
-    //   })}
-    // </div>
-
     <table>
       <thead>
         <tr>
@@ -31,6 +12,7 @@ const CustomerDetailsList = ({ customers }) => {
           <th>Last Name</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>Options</th>
         </tr>
       </thead>
 
@@ -43,6 +25,12 @@ const CustomerDetailsList = ({ customers }) => {
               <td>{item.lastname}</td>
               <td>{item.email}</td>
               <td>{item.phone}</td>
+              <td>
+                <div className="button-group">
+                  <ViewButton text="Edit" />
+                  <DeleteButton text="Delete" />
+                </div>
+              </td>
             </tr>
           );
         })}

@@ -17,6 +17,27 @@
 }
 .news-item {
   background: rgb(208, 220, 231);
-  padding: 1rem;
+  /* padding: 1rem; */
   border-radius: 5px;
+}
+.news-item img {
+  width: 100%;
+  border-radius: 0;
+}
+.news-item .news-body {
+  padding: 1rem;
+}
+.news-item .news-body .news-title {
+  font-size: 1.5rem;
+}
+.news-item .news-body .news-body-group {
+  display: flex;
+  align-items: center;
+}
+.news-body-group label {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+.button-group {
+  display: flex;
 }

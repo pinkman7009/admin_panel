@@ -13,10 +13,17 @@ const ModalBody = () => {
 
   const [form, setForm] = useState({});
 
+  const [roleType, setRoleType] = useState("0");
+
   const { firstname, lastname, email, password, role } = form;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const onSelectChange = (e) => {
+    console.log(e.target.value);
+    setRoleType(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,13 +66,51 @@ const ModalBody = () => {
         onChange={handleChange}
       />
       <input
-        name="role"
+        name="roleTitle"
         type="text"
         placeholder="Enter Role Title"
         className="modal-input"
         value={role}
         onChange={handleChange}
       />
+
+      <div className="form-select-group">
+        <label htmlFor="">Select Role Type</label>
+        <select
+          name="role"
+          id=""
+          className="select-box"
+          onChange={onSelectChange}
+        >
+          <option value="0">Admin</option>
+          <option value="1">User</option>
+        </select>
+      </div>
+
+      {roleType === "0" ? (
+        <div className="admin-access-options">
+          <div className="checkbox-group">
+            <label htmlFor="">Manage Access</label>
+            <input type="checkbox" />
+          </div>
+          <div className="checkbox-group">
+            <label htmlFor="">Categories</label>
+            <input type="checkbox" />
+          </div>
+          <div className="checkbox-group">
+            <label htmlFor="">News</label>
+            <input type="checkbox" />
+          </div>
+          <div className="checkbox-group">
+            <label htmlFor="">Customer Details</label>
+            <input type="checkbox" />
+          </div>
+          <div className="checkbox-group">
+            <label htmlFor="">Memberships</label>
+            <input type="checkbox" />
+          </div>
+        </div>
+      ) : null}
 
       <SaveButton handleClick={handleSubmit} />
     </>

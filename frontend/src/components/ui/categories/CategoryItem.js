@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../../../styles/Categories.css";
 import { AiFillCaretDown } from "react-icons/ai";
 import SubCategories from "./SubCategories";
+import ViewButton from "../buttons/ViewButton";
+import DeleteButton from "../buttons/DeleteButton";
 
 const CategoryItem = ({ category }) => {
   const [showSub, setShowSub] = useState(false);
@@ -9,8 +11,12 @@ const CategoryItem = ({ category }) => {
   return (
     <>
       <div className="category-item">
-        {category.value}
+        <div>{category.value}</div>
         {/* <AiFillCaretDown onClick={() => setShowSub(!showSub)} /> */}
+        <div className="button-group">
+          <ViewButton text="Edit" />
+          <DeleteButton text="Delete" />
+        </div>
       </div>
       {/* {showSub ? (
         <SubCategories

@@ -72,7 +72,7 @@ td {
 th {
   background: #0f1975;
   color: #fff;
-  width: 20%;
+  width: 16.66%;
 }
 
 tbody tr:nth-child(odd) {
@@ -81,4 +81,8 @@ tbody tr:nth-child(odd) {
 
 tbody tr:nth-child(even) {
   background-color: #e9ecef;
+}
+
+.button-group {
+  display: flex;
 }

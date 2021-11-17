@@ -26,8 +26,9 @@
   padding: 0.5rem;
   margin: 1rem auto;
   display: flex;
-  height: 100px;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 200px;
+  justify-content: space-evenly;
   font-weight: bold;
   align-items: center;
   width: 80%;
@@ -45,4 +46,8 @@
 
 .subcategory-item {
   margin: 1rem 0;
+}
+
+.button-group {
+  display: flex;
 }
