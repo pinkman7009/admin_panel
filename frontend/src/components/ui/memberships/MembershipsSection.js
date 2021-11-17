@@ -60,7 +60,7 @@ const MembershipsSection = () => {
   const handleClick = () => {
     dispatch({
       type: OPEN_MODAL,
-      payload: { title: "Add Category", body: <ModalBody /> },
+      payload: { title: "Add Membership", body: <ModalBody /> },
     });
   };
   return (

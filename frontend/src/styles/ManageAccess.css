@@ -1,10 +1,12 @@
 .access-container {
   padding: 1rem;
+  height: 60vh;
 }
 .access-section {
   background: #fff;
   border-radius: 10px;
   padding: 1rem;
+  height: 100%;
 }
 .access-section-header {
   display: flex;

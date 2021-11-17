@@ -3,10 +3,13 @@
   min-height: 100vh;
   width: 100vw;
   background: rgb(232, 241, 255);
-  position: relative;
+  /* position: relative; */
 }
 .main-window-right {
   width: 100%;
+}
+.main-window-right-bottom {
+  position: relative;
 }
 
 .dashboard-container {

@@ -10,14 +10,14 @@ const CategoryItem = ({ category }) => {
     <>
       <div className="category-item">
         {category.value}
-        <AiFillCaretDown onClick={() => setShowSub(!showSub)} />
+        {/* <AiFillCaretDown onClick={() => setShowSub(!showSub)} /> */}
       </div>
-      {showSub ? (
+      {/* {showSub ? (
         <SubCategories
           id={category._id}
           subcategories={category.subcategories}
         />
-      ) : null}
+      ) : null} */}
     </>
   );
 };

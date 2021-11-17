@@ -30,7 +30,7 @@ const Login = (props) => {
   return (
     <div className="head">
       <Navbar />
-
+      <img src="./logo.png" alt="logo" className="logo-style-login" />
       <form className="box">
         <h1>Log In</h1>
         <div className="head-box">
