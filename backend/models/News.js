@@ -13,6 +13,7 @@ const NewsSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    desc2: String,
     image: String,
     date: {
         type: Date,

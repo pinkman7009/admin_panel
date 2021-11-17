@@ -6,8 +6,23 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 
+router.get("/", auth, async (req, res) => {
+    try {
+        const users = await User.find()
+            .sort({
+                date: -1,
+            })
+            .select("-password");
+        res.json(users);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("server error");
+    }
+});
+
 router.post(
     "/",
+    auth,
     [
         body("firstname").not().isEmpty(),
         body("lastname").not().isEmpty(),
@@ -33,9 +48,23 @@ router.post(
         try {
             let user = await User.findOne({ email });
 
-            if (!user) {
+            if (user) {
                 res.status(400).json({ msg: "Email id already used" });
             }
+            const p = false;
+
+            if (
+                user.permissions.forEach((permission) => {
+                    if (permission === "MANAGE_ACCESS") {
+                        p = true;
+                    }
+                })
+            )
+                if (!p) {
+                    return res
+                        .status(400)
+                        .json({ msg: "No Permission to access" });
+                }
 
             user = new User({
                 firstname,
@@ -76,63 +105,5 @@ router.post(
         }
     }
 );
-
-router.put("/:id", auth, async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id);
-
-        if (!user) {
-            res.status(400).json({ msg: "No user found" });
-        }
-
-        user.firstname = req.body.first.firstname || user.firstname;
-        user.lastname = req.body.first.lastname || user.lastname;
-        user.email = req.body.first.email || user.email;
-        user.password = req.body.first.password || user.password;
-        user.role = req.body.first.role || user.role;
-        user.roleType = req.body.first.roleType || user.roleType;
-        user.permissions = req.body.first.permissions || user.permissions;
-
-        const salt = await bcrypt.genSalt(10);
-
-        user.password = await bcrypt.hash(password, salt);
-
-        await user.save();
-
-        const payload = {
-            user: {
-                id: user.id,
-            },
-        };
-
-        jwt.sign(
-            payload,
-            process.env.jwtSecret,
-            {
-                expiresIn: 360000,
-            },
-            (err, token) => {
-                if (err) throw err;
-                res.json({ token });
-            }
-        );
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("server error");
-    }
-});
-
-router.put("/:id", auth, async (req, res) => {
-    try {
-        const user = await User.findByIdAndDelete(req.params.id);
-
-        if (!user) {
-            res.status(400).json({ msg: "No user found" });
-        }
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("server error");
-    }
-});
 
 module.exports = router;
