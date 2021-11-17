@@ -17,18 +17,18 @@ export const fetchCategories = () => async (dispatch) => {
 
     const categories = res.data;
 
-    const updatedCategories = await Promise.all(
-      categories.map(async (item) => {
-        const subs = await fetchSubCategories(item._id);
-        return {
-          ...item,
-          subcategories: subs,
-        };
-      })
-    );
+    // const updatedCategories = await Promise.all(
+    //   categories.map(async (item) => {
+    //     const subs = await fetchSubCategories(item._id);
+    //     return {
+    //       ...item,
+    //       subcategories: subs,
+    //     };
+    //   })
+    // );
 
-    console.log({ updatedCategories });
-    dispatch({ type: GET_CATEGORIES, payload: updatedCategories });
+    // console.log({ updatedCategories });
+    dispatch({ type: GET_CATEGORIES, payload: categories });
 
     console.log(res.data);
   } catch (error) {

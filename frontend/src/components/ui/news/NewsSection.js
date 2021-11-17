@@ -25,6 +25,10 @@ const ModalBody = () => {
 
   return (
     <>
+      <div className="form-group">
+        <label htmlFor="">Upload Head Image</label>
+        <input type="file" />
+      </div>
       <input
         name="title"
         type="text"
@@ -33,19 +37,33 @@ const ModalBody = () => {
         onChange={handleChange}
         value={title}
       />
+
       <input
-        name="image"
         type="text"
-        placeholder="Enter URL"
+        name="author"
+        placeholder="Enter author name"
         className="modal-input"
-        onChange={handleChange}
-        value={image}
       />
-      <input
+
+      <div className="form-group">
+        <label htmlFor="">Upload Description 1 Image</label>
+        <input type="file" />
+      </div>
+
+      <textarea
         name="desc"
         type="text"
-        placeholder="Enter description"
-        className="modal-input"
+        placeholder="Enter description 1"
+        className="modal-textarea"
+        onChange={handleChange}
+        value={desc}
+      />
+
+      <textarea
+        name="desc2"
+        type="text"
+        placeholder="Enter description 2"
+        className="modal-textarea"
         onChange={handleChange}
         value={desc}
       />
