@@ -1,8 +1,8 @@
 import React from "react";
 import "../../styles/Modal.css";
-import { GrClose } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { CLOSE_MODAL } from "../../types/modalTypes";
+import ViewButton from "./buttons/ViewButton";
 
 const Modal = ({ title, body }) => {
   const dispatch = useDispatch();
@@ -13,9 +13,7 @@ const Modal = ({ title, body }) => {
   return (
     <div className="modal-container">
       <div className="modal-wrapper">
-        <div onClick={closeModal} style={{ cursor: "pointer" }}>
-          <GrClose />
-        </div>
+        <ViewButton handleClick={closeModal} text="Go Back" />
         <h3 className="modal-title">{title}</h3>
         {body}
       </div>

@@ -13,23 +13,31 @@
 }
 .membership-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
   margin: 0 auto;
-  width: 50%;
+  width: 100%;
 }
 .membership-item {
-  border: 1px solid #0f1975;
+  border: 2px solid #0f1975;
   background: rgb(208, 220, 231);
   border-radius: 5px;
   padding: 0.5rem;
   margin: 1rem;
   display: flex;
-  height: 150px;
-  width: 150px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.membership-item ul {
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+.membership-item ul li {
+  padding: 1rem;
+  border-bottom: 1px solid #0f1975;
 }
 .membership-item .name {
   font-weight: bold;
@@ -38,4 +46,7 @@
 .membership-item .price {
   color: green;
   font-weight: bold;
+}
+.button-group {
+  display: flex;
 }
