@@ -32,6 +32,6 @@
   width: 180px;
   height: 100px;
   margin: 1rem auto;
-  background: rgb(192, 226, 255);
+  background: #fff;
   object-fit: cover;
 }

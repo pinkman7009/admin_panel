@@ -44,6 +44,16 @@ const ModalBody = () => {
         value={price}
         onChange={handleChange}
       />
+      <div className="admin-access-options">
+        <div className="checkbox-group">
+          <label htmlFor="">Upload Video with HD Resolution</label>
+          <input type="checkbox" />
+        </div>
+        <div className="checkbox-group">
+          <label htmlFor="">Attachment & Post Scheduling</label>
+          <input type="checkbox" />
+        </div>
+      </div>
       <SaveButton handleClick={handleSubmit} />
     </>
   );

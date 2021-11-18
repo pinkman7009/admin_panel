@@ -29,6 +29,7 @@ const CustomerDetailsList = ({ customers }) => {
                 <div className="button-group">
                   <ViewButton text="Edit" />
                   <DeleteButton text="Delete" />
+                  <DeleteButton text="Block" />
                 </div>
               </td>
             </tr>
