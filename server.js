@@ -19,15 +19,16 @@ app.use("/api/categories", require("./backend/routes/categories"));
 app.use("/api/news", require("./backend/routes/news"));
 app.use("/api/subcategories", require("./backend/routes/subcategories"));
 app.use("/api/plans", require("./backend/routes/plan"));
+app.use("/api/manageaccess", require("./backend/routes/manageAccess"));
 
 const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/build")));
+    app.use(express.static(path.join(__dirname, "/frontend/build")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-  );
+    app.get("*", (req, res) =>
+        res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+    );
 }
 
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));

@@ -12,18 +12,17 @@ route.get("/", auth, async (req, res) => {
         if (!user) {
             return res.status(400).json({ msg: "User not found" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "CATEGORIES") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "CATEGORIES") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         const categories = await Categories.find().sort({
             date: -1,
@@ -56,18 +55,17 @@ route.post("/", auth, [body("value").not().isEmpty()], async (req, res) => {
         if (role !== 0) {
             return res.status(401).json({ msg: "Not Authorised" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "CATEGORIES") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "CATEGORIES") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         const category = new Categories({
             value,
@@ -95,18 +93,17 @@ route.put("/:id", auth, async (req, res) => {
         if (role !== 0) {
             return res.status(401).json({ msg: "Not Authorised" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "CATEGORIES") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "CATEGORIES") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         const category = await Categories.findById(req.params.id);
 
@@ -139,18 +136,17 @@ route.delete("/:id", auth, async (req, res) => {
         if (role !== 0) {
             return res.status(401).json({ msg: "Not Authorised" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "CATEGORIES") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "CATEGORIES") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         await Categories.findByIdAndDelete(req.params.id);
 

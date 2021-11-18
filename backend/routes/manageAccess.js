@@ -8,6 +8,24 @@ const auth = require("../middleware/auth");
 
 router.get("/", auth, async (req, res) => {
     try {
+        const user = await User.findById(req.user.id).select("-password");
+
+        if (!user) {
+            return res.status(400).json({ msg: "User not found" });
+        }
+
+        let p = false;
+
+        user.permissions.forEach((permission) => {
+            if (permission === "MANAGE_ACCESS") {
+                p = true;
+            }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
+
         const users = await User.find()
             .sort({
                 date: -1,
@@ -46,27 +64,26 @@ router.post(
             roleType,
         } = req.body;
         try {
-            let user = await User.findOne({ email });
+            const user = await User.findById(req.user.id).select("-password");
 
-            if (user) {
-                res.status(400).json({ msg: "Email id already used" });
+            if (!user) {
+                return res.status(400).json({ msg: "User not found" });
             }
-            const p = false;
+            let p = false;
 
-            if (
-                user.permissions.forEach((permission) => {
-                    if (permission === "MANAGE_ACCESS") {
-                        p = true;
-                    }
-                })
-            )
-                if (!p) {
-                    return res
-                        .status(400)
-                        .json({ msg: "No Permission to access" });
+            user.permissions.forEach((permission) => {
+                if (permission === "MANAGE_ACCESS") {
+                    p = true;
                 }
+            });
 
-            user = new User({
+            if (!p) {
+                return res.status(400).json({ msg: "No Permission to access" });
+            }
+
+            console.log("vivek");
+
+            const newuser = new User({
                 firstname,
                 lastname,
                 role,
@@ -78,27 +95,11 @@ router.post(
 
             const salt = await bcrypt.genSalt(10);
 
-            user.password = await bcrypt.hash(password, salt);
+            newuser.password = await bcrypt.hash(password, salt);
 
-            await user.save();
+            await newuser.save();
 
-            const payload = {
-                user: {
-                    id: user.id,
-                },
-            };
-
-            jwt.sign(
-                payload,
-                process.env.jwtSecret,
-                {
-                    expiresIn: 360000,
-                },
-                (err, token) => {
-                    if (err) throw err;
-                    res.json({ token });
-                }
-            );
+            res.status(201).json({ msg: "User Saved" });
         } catch (err) {
             console.error(err.message);
             res.status(500).send("server error");

@@ -12,18 +12,17 @@ route.get("/", auth, async (req, res) => {
         if (!user) {
             return res.status(400).json({ msg: "User not found" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "NEWS") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "NEWS") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         const news = await News.find().sort({
             date: -1,
@@ -59,20 +58,17 @@ route.post(
             if (role !== 0) {
                 return res.status(401).json({ msg: "Not Authorised" });
             }
-            const p = false;
+            let p = false;
 
-            if (
-                user.permissions.forEach((permission) => {
-                    if (permission === "NEWS") {
-                        p = true;
-                    }
-                })
-            )
-                if (!p) {
-                    return res
-                        .status(400)
-                        .json({ msg: "No Permission to access" });
+            user.permissions.forEach((permission) => {
+                if (permission === "NEWS") {
+                    p = true;
                 }
+            });
+
+            if (!p) {
+                return res.status(400).json({ msg: "No Permission to access" });
+            }
 
             const news = new News({
                 title,
@@ -104,18 +100,17 @@ route.put("/:id", auth, async (req, res) => {
         if (role !== 0) {
             return res.status(401).json({ msg: "Not Authorised" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "NEWS") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "NEWS") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         const news = await News.findById(req.params.id);
 
@@ -145,23 +140,22 @@ route.delete("/:id", auth, async (req, res) => {
             return res.status(400).json({ msg: "User not found" });
         }
 
-        const role = user.role;
+        let role = user.role;
 
         if (role !== 0) {
             return res.status(401).json({ msg: "Not Authorised" });
         }
         const p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "NEWS") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "NEWS") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         await News.findByIdAndDelete(req.params.id);
 

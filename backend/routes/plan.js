@@ -12,7 +12,7 @@ route.get("/", auth, async (req, res) => {
         if (!user) {
             return res.status(400).json({ msg: "User not found" });
         }
-        const p = false;
+        let p = false;
 
         if (
             user.permissions.forEach((permission) => {
@@ -60,20 +60,17 @@ route.post(
             if (role !== 0) {
                 return res.status(401).json({ msg: "Not Authorised" });
             }
-            const p = false;
+            let p = false;
 
-            if (
-                user.permissions.forEach((permission) => {
-                    if (permission === "MEMBERSHIP_PLAN") {
-                        p = true;
-                    }
-                })
-            )
-                if (!p) {
-                    return res
-                        .status(400)
-                        .json({ msg: "No Permission to access" });
+            user.permissions.forEach((permission) => {
+                if (permission === "MEMBERSHIP_PLAN") {
+                    p = true;
                 }
+            });
+
+            if (!p) {
+                return res.status(400).json({ msg: "No Permission to access" });
+            }
 
             const plan = new Plan({
                 name,
@@ -103,18 +100,17 @@ route.put("/:id", auth, async (req, res) => {
         if (role !== 0) {
             return res.status(401).json({ msg: "Not Authorised" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "MEMBERSHIP_PLAN") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "MEMBERSHIP_PLAN") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         const plans = await Plan.findById(req.params.id);
 
@@ -148,22 +144,21 @@ route.delete("/:id", auth, async (req, res) => {
         if (role !== 0) {
             return res.status(401).json({ msg: "Not Authorised" });
         }
-        const p = false;
+        let p = false;
 
-        if (
-            user.permissions.forEach((permission) => {
-                if (permission === "MEMBERSHIP_PLAN") {
-                    p = true;
-                }
-            })
-        )
-            if (!p) {
-                return res.status(400).json({ msg: "No Permission to access" });
+        user.permissions.forEach((permission) => {
+            if (permission === "MEMBERSHIP_PLAN") {
+                p = true;
             }
+        });
+
+        if (!p) {
+            return res.status(400).json({ msg: "No Permission to access" });
+        }
 
         await Plan.findByIdAndDelete(req.params.id);
 
-        res.status(200).json({ msg: "News Deleted" });
+        res.status(200).json({ msg: "Plan Deleted" });
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ msg: err.message });
