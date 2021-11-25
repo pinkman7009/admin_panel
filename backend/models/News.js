@@ -15,6 +15,13 @@ const NewsSchema = mongoose.Schema({
     },
     desc2: String,
     image: String,
+    country: String,
+    state: String,
+    city: String,
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categories",
+    },
     date: {
         type: Date,
         default: Date.now,
