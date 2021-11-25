@@ -73,7 +73,7 @@ route.post(
             const news = new News({
                 title,
                 desc,
-                dec2,
+                desc2,
                 country,
                 city,
                 state,
