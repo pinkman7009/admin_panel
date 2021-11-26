@@ -44,7 +44,8 @@ route.post(
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { title, desc, desc2, country, city, state, category } = req.body;
+        const { title, desc, desc2, country, city, state, category, author } =
+            req.body;
 
         try {
             const user = await User.findById(req.user.id).select("-password");
@@ -78,6 +79,7 @@ route.post(
                 city,
                 state,
                 category,
+                author,
                 user: req.user.id,
             });
 
@@ -125,6 +127,7 @@ route.put("/:id", auth, async (req, res) => {
         news.city = req.body.city || news.city;
         news.state = req.body.state || news.state;
         news.category = req.body.category || news.category;
+        news.author = req.body.author || news.author;
 
         await news.save();
 
