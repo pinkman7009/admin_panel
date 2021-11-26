@@ -15,18 +15,15 @@ const ModalBody = () => {
 
   const [roleType, setRoleType] = useState("0");
 
-  const { firstname, lastname, email, password, role } = form;
+  const { firstname, lastname, email, password, roleTitle } = form;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onSelectChange = (e) => {
-    console.log(e.target.value);
-    setRoleType(e.target.value);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    form.role = 0;
     dispatch(addRole(form));
     dispatch({ type: CLOSE_MODAL });
   };
@@ -70,22 +67,9 @@ const ModalBody = () => {
         type="text"
         placeholder="Enter Role Title"
         className="modal-input"
-        value={role}
+        value={roleTitle}
         onChange={handleChange}
       />
-
-      <div className="form-select-group">
-        <label htmlFor="">Select Role Type</label>
-        <select
-          name="role"
-          id=""
-          className="select-box"
-          onChange={onSelectChange}
-        >
-          <option value="0">Admin</option>
-          <option value="1">User</option>
-        </select>
-      </div>
 
       {roleType === "0" ? (
         <div className="admin-access-options">

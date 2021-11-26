@@ -1,13 +1,36 @@
 import React from "react";
-import CategoryItem from "./CategoryItem";
+import "../../../styles/Categories.css";
+import ViewButton from "../buttons/ViewButton";
+import DeleteButton from "../buttons/DeleteButton";
 
 const CategoriesList = ({ categories }) => {
   return (
-    <div className="category-item-list">
-      {categories?.map((item) => {
-        return <CategoryItem key={item.id} category={item} />;
-      })}
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Category Name</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {categories?.map((item, index) => {
+          return (
+            <tr>
+              <td>{index + 1}</td>
+              <td>{item.value}</td>
+              <td>
+                <div className="button-group">
+                  <ViewButton text="Edit" />
+                  <DeleteButton text="Delete" />
+                </div>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 
