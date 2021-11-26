@@ -24,9 +24,11 @@ route.get("/", async (req, res) => {
         //   return res.status(400).json({ msg: "No Permission to access" });
         // }
 
-        const news = await News.find().sort({
-            date: -1,
-        });
+        const news = await News.find()
+            .sort({
+                date: -1,
+            })
+            .populate("category");
         res.json(news);
     } catch (err) {
         console.error(err.message);
