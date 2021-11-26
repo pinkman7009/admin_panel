@@ -17,10 +17,10 @@ const CustomerDetailsList = ({ customers }) => {
       </thead>
 
       <tbody>
-        {customers.map((item) => {
+        {customers.map((item, index) => {
           return (
             <tr>
-              <td>{item.id}</td>
+              <td>{index + 1}</td>
               <td>{item.firstname}</td>
               <td>{item.lastname}</td>
               <td>{item.email}</td>
