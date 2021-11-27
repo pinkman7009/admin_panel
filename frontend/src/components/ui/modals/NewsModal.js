@@ -22,12 +22,12 @@ const NewsModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addNews(form));
-    dispatch({ type: CLOSE_MODAL });
+    navigate("/news");
   };
 
   const closeModal = () => {
     // dispatch({ type: CLOSE_MODAL, payload: null });
-    navigate("/categories");
+    navigate("/news");
   };
 
   return (

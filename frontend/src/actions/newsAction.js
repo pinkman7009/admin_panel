@@ -26,3 +26,49 @@ export const addNews = (formData) => async (dispatch, token) => {
     console.error(err);
   }
 };
+
+export const deleteNews = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/news/${id}`);
+
+    dispatch(getNews());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const approveUserNews = (id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+    };
+    const body = {
+      status: "Accepted",
+    };
+    const res = await axios.put(`/api/news/${id}`, body, config);
+
+    dispatch(getNews());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const denyUserNews = (id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+    };
+    const body = {
+      status: "Denied",
+    };
+    const res = await axios.put(`/api/news/${id}`, body, config);
+
+    dispatch(getNews());
+  } catch (err) {
+    console.error(err);
+  }
+};
