@@ -8,62 +8,112 @@ import ViewButton from "../buttons/ViewButton";
 import { useNavigate } from "react-router-dom";
 
 const MembershipsModal = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  const [form, setForm] = useState({});
+    const [form, setForm] = useState({});
 
-  const { name, price } = form;
+    const {
+        name,
+        price,
+        createPostLimit,
+        canComment,
+        canDeletePost,
+        viewPost,
+    } = form;
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(addMemberships(form));
-    dispatch({ type: CLOSE_MODAL });
-    navigate("/memberships");
-  };
-  const closeModal = () => {
-    // dispatch({ type: CLOSE_MODAL, payload: null });
-    navigate("/memberships");
-  };
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        dispatch(addMemberships(form));
+        dispatch({ type: CLOSE_MODAL });
+        navigate("/memberships");
+    };
+    const closeModal = () => {
+        // dispatch({ type: CLOSE_MODAL, payload: null });
+        navigate("/memberships");
+    };
 
-  return (
-    <div className="modal-container">
-      <div className="modal-wrapper">
-        <ViewButton handleClick={closeModal} text="Go Back" />
-        <h3 className="modal-title">Add Memberships</h3>
-        <input
-          name="name"
-          type="text"
-          placeholder="Plan name"
-          className="modal-input"
-          value={name}
-          onChange={handleChange}
-        />
-        <input
-          name="price"
-          type="number"
-          placeholder="Plan price"
-          className="modal-input"
-          value={price}
-          onChange={handleChange}
-        />
-        <div className="admin-access-options">
-          <div className="checkbox-group">
-            <label htmlFor="">Upload Video with HD Resolution</label>
-            <input type="checkbox" />
-          </div>
-          <div className="checkbox-group">
-            <label htmlFor="">Attachment & Post Scheduling</label>
-            <input type="checkbox" />
-          </div>
+    return (
+        <div className="modal-container">
+            <div className="modal-wrapper">
+                <ViewButton handleClick={closeModal} text="Go Back" />
+                <h3 className="modal-title">Add Memberships</h3>
+                <input
+                    name="name"
+                    type="text"
+                    placeholder="Plan name"
+                    className="modal-input"
+                    value={name}
+                    onChange={handleChange}
+                />
+                <input
+                    name="price"
+                    type="number"
+                    placeholder="Plan price"
+                    className="modal-input"
+                    value={price}
+                    onChange={handleChange}
+                />
+                <input
+                    name="createPostLimit"
+                    type="number"
+                    placeholder="Create Post Limit"
+                    className="modal-input"
+                    value={createPostLimit}
+                    onChange={handleChange}
+                />
+                <div className="admin-access-options">
+                    <div className="checkbox-group">
+                        <label htmlFor="">View Post</label>
+                        <input
+                            type="checkbox"
+                            name="viewPost"
+                            checked={viewPost}
+                            onChange={() => {
+                                setForm({
+                                    ...form,
+                                    viewPost: !viewPost,
+                                });
+                            }}
+                        />
+                    </div>
+                    <div className="checkbox-group">
+                        <label htmlFor="">Can Comment</label>
+                        <input
+                            type="checkbox"
+                            name="canComment"
+                            checked={canComment}
+                            onChange={() => {
+                                setForm({
+                                    ...form,
+                                    canComment: !canComment,
+                                });
+                            }}
+                        />
+                    </div>
+                    <div className="checkbox-group">
+                        <label htmlFor="">Can Delete Post</label>
+                        <input
+                            type="checkbox"
+                            name="canDeletePost"
+                            checked={canDeletePost}
+                            onChange={() => {
+                                setForm({
+                                    ...form,
+                                    canDeletePost: !canDeletePost,
+                                });
+                            }}
+                        />
+                    </div>
+                </div>
+                <SaveButton handleClick={handleSubmit} />
+            </div>
         </div>
-        <SaveButton handleClick={handleSubmit} />
-      </div>
-    </div>
-  );
+    );
 };
 
 export default MembershipsModal;
