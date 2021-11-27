@@ -22,6 +22,10 @@ const Mainscreen = () => {
       route: "/customerdetails",
     },
     {
+      title: "User News",
+      route: "/usernews",
+    },
+    {
       title: "News",
       route: "/news",
     },

@@ -6,6 +6,7 @@ import ManageAccessSection from "../access/ManageAccessSection";
 import CategoriesSection from "../categories/CategoriesSection";
 import CustomerDetailsSection from "../customerdetails/CustomerDetailsSection";
 import NewsSection from "../news/NewsSection";
+import UserNewsSection from "../usernews/UserNewsSection";
 import MembershipsSection from "../memberships/MembershipsSection";
 import "../../../styles/Dashboard.css";
 import Toast from "../../ui/Toast";
@@ -34,6 +35,7 @@ const DashboardWindow = () => {
             element={<CustomerDetailsSection />}
           />
           <Route exact path="/news" element={<NewsSection />} />
+          <Route exact path="/usernews" element={<UserNewsSection />} />
           <Route exact path="/memberships" element={<MembershipsSection />} />
 
           {/* Modals */}

@@ -12,7 +12,8 @@ route.get("/", async (req, res) => {
       .sort({
         date: -1,
       })
-      .populate("category");
+      .populate("category")
+      .populate("user");
     res.json(news);
   } catch (err) {
     console.error(err.message);
@@ -57,19 +58,26 @@ route.post(
 
       const role = user.role;
 
-      if (role !== 0) {
-        return res.status(401).json({ msg: "Not Authorised" });
-      }
-      let p = false;
+      // if (role !== 0) {
+      //   return res.status(401).json({ msg: "Not Authorised" });
+      // }
 
-      user.permissions.forEach((permission) => {
-        if (permission === "NEWS") {
-          p = true;
+      let status = "Pending";
+
+      if (role === 0) {
+        let p = false;
+
+        user.permissions.forEach((permission) => {
+          if (permission === "NEWS") {
+            p = true;
+          }
+        });
+
+        if (!p) {
+          return res.status(400).json({ msg: "No Permission to access" });
         }
-      });
 
-      if (!p) {
-        return res.status(400).json({ msg: "No Permission to access" });
+        status = "Accepted";
       }
 
       const news = new News({
@@ -82,6 +90,7 @@ route.post(
         category,
         author,
         user: req.user.id,
+        status,
       });
 
       await news.save();
@@ -129,6 +138,7 @@ route.put("/:id", auth, async (req, res) => {
     news.state = req.body.state || news.state;
     news.category = req.body.category || news.category;
     news.author = req.body.author || news.author;
+    news.status = req.body.status || news.status;
 
     await news.save();
 
@@ -157,7 +167,7 @@ route.delete("/:id", auth, async (req, res) => {
     if (role !== 0) {
       return res.status(401).json({ msg: "Not Authorised" });
     }
-    const p = false;
+    let p = false;
 
     user.permissions.forEach((permission) => {
       if (permission === "NEWS") {
