@@ -10,7 +10,7 @@ const Mainscreen = () => {
       route: "/dashboard",
     },
     {
-      title: "Manage Access",
+      title: "Manage Role",
       route: "/access",
     },
     {

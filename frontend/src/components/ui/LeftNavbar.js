@@ -12,7 +12,7 @@ import { FaUserEdit, FaRegNewspaper } from "react-icons/fa";
 const LeftNavbar = ({ links }) => {
   const iconGroup = (title) => {
     if (title === "Dashboard") return <MdDashboard />;
-    else if (title === "Manage Access") return <MdOutlineAccessibilityNew />;
+    else if (title === "Manage Role") return <MdOutlineAccessibilityNew />;
     else if (title === "Categories") return <MdFormatListBulleted />;
     else if (title === "Customer Details") return <FaUserEdit />;
     else if (title === "News") return <FaRegNewspaper />;

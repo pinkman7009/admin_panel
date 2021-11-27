@@ -9,6 +9,7 @@ import {
   fetchMemberships,
   addMemberships,
 } from "../../../actions/membershipsAction";
+import { useNavigate } from "react-router-dom";
 
 const ModalBody = () => {
   const dispatch = useDispatch();
@@ -62,16 +63,19 @@ const ModalBody = () => {
 const MembershipsSection = () => {
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const state = useSelector((state) => state);
   useEffect(() => {
     dispatch(fetchMemberships());
   }, []);
 
   const handleClick = () => {
-    dispatch({
-      type: OPEN_MODAL,
-      payload: { title: "Add Membership", body: <ModalBody /> },
-    });
+    // dispatch({
+    //   type: OPEN_MODAL,
+    //   payload: { title: "Add Membership", body: <ModalBody /> },
+    // });
+    navigate("/memberships/modal");
   };
   return (
     <div className="memberships-container">
