@@ -40,6 +40,10 @@ route.post(
                 return res.status(400).json({ msg: "Wrong Password" });
             }
 
+            if (user.blockedStatus) {
+                return res.status(400).json({ msg: "User Blocked" });
+            }
+
             const payload = {
                 user: {
                     id: user.id,
