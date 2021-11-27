@@ -29,8 +29,6 @@ export const fetchCategories = () => async (dispatch) => {
 
     // console.log({ updatedCategories });
     dispatch({ type: GET_CATEGORIES, payload: categories });
-
-    console.log(res.data);
   } catch (error) {
     console.log(error);
   }
@@ -45,6 +43,15 @@ export const addCategories = (formData) => async (dispatch) => {
     };
 
     const res = await axios.post("/api/categories", formData, config);
+    dispatch(fetchCategories());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteCategory = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/categories/${id}`);
     dispatch(fetchCategories());
   } catch (error) {
     console.log(error);

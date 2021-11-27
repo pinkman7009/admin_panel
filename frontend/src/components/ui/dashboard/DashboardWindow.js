@@ -8,7 +8,7 @@ import CustomerDetailsSection from "../customerdetails/CustomerDetailsSection";
 import NewsSection from "../news/NewsSection";
 import MembershipsSection from "../memberships/MembershipsSection";
 import "../../../styles/Dashboard.css";
-import Modal from "../../ui/Modal";
+import Toast from "../../ui/Toast";
 import AccessModal from "../modals/AccessModal";
 import CategoriesModal from "../modals/CategoriesModal";
 import NewsModal from "../modals/NewsModal";
@@ -46,10 +46,13 @@ const DashboardWindow = () => {
             element={<MembershipsModal />}
           />
         </Routes>
-        {state.modal !== null ? (
-          <Modal title={state.modal.title} body={state.modal.body} />
-        ) : null}
       </div>
+      {state.modal !== null ? (
+        <Toast
+          title={state.modal.title}
+          handleClick={state.modal.handleClick}
+        />
+      ) : null}
     </div>
   );
 };

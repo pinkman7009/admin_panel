@@ -64,7 +64,7 @@ const CategoriesSection = () => {
           <AddButton resource="Category" handleClick={handleClick} />
         </div>
 
-        <CategoriesList categories={state.categories} />
+        {state.categories && <CategoriesList categories={state.categories} />}
       </div>
     </div>
   );
