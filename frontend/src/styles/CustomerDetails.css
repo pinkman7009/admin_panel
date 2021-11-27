@@ -1,6 +1,7 @@
 .cd-container {
   padding: 1rem;
 }
+
 .cd-stats {
   display: flex;
   justify-content: center;
@@ -58,8 +59,6 @@
   border: 2px solid #0f1975;
   background: rgb(230, 230, 230);
   width: 90%;
-}
-.cd-table-headers h3 {
 }
 .cd-table-records {
   display: flex;

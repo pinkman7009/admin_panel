@@ -13,6 +13,7 @@ import Toast from "../../ui/Toast";
 import AccessModal from "../modals/AccessModal";
 import CategoriesModal from "../modals/CategoriesModal";
 import NewsModal from "../modals/NewsModal";
+import CustomerDetailsModal from "../modals/CustomerDetailsModal";
 
 import { useDispatch, useSelector } from "react-redux";
 import MembershipsModal from "../modals/MembershipsModal";
@@ -39,6 +40,11 @@ const DashboardWindow = () => {
           <Route exact path="/memberships" element={<MembershipsSection />} />
 
           {/* Modals */}
+          <Route
+            exact
+            path="/customerdetails/modal"
+            element={<CustomerDetailsModal />}
+          />
           <Route exact path="/access/modal" element={<AccessModal />} />
           <Route exact path="/categories/modal" element={<CategoriesModal />} />
           <Route exact path="/news/modal" element={<NewsModal />} />
