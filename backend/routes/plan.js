@@ -46,7 +46,18 @@ route.post(
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { name, price } = req.body;
+        const {
+            name,
+            price,
+            createPostLimit,
+            viewPost,
+            canComment,
+            canDeletePost,
+            viewChannel,
+            createChannel,
+            editChannel,
+            deleteChannel,
+        } = req.body;
 
         try {
             const user = await User.findById(req.user.id).select("-password");
@@ -75,6 +86,14 @@ route.post(
             const plan = new Plan({
                 name,
                 price,
+                viewChannel,
+                createChannel,
+                editChannel,
+                deleteChannel,
+                createPostLimit,
+                viewPost,
+                canComment,
+                canDeletePost,
             });
 
             await plan.save();
