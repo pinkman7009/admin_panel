@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_MODAL, OPEN_MODAL } from "../../../types/modalTypes";
 import { register, addRole } from "../../../actions/registerAction";
 import { getUsers } from "../../../actions/roleAction";
+import { useNavigate } from "react-router-dom";
 
 const ModalBody = () => {
   const dispatch = useDispatch();
@@ -106,15 +107,18 @@ const ManageAccessSection = () => {
 
   const state = useSelector((state) => state);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getUsers());
   }, []);
 
   const handleClick = () => {
-    dispatch({
-      type: OPEN_MODAL,
-      payload: { title: "Add Role", body: <ModalBody /> },
-    });
+    // dispatch({
+    //   type: OPEN_MODAL,
+    //   payload: { title: "Add Role", body: <ModalBody /> },
+    // });
+    navigate("/access/modal");
   };
   return (
     <div className="access-container">

@@ -10,6 +10,7 @@ import {
   addCategories,
   fetchCategories,
 } from "../../../actions/categoryActions";
+import { useNavigate } from "react-router-dom";
 
 const ModalBody = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const ModalBody = () => {
 
 const CategoriesSection = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const state = useSelector((state) => state);
 
@@ -52,10 +54,7 @@ const CategoriesSection = () => {
   }, []);
 
   const handleClick = () => {
-    dispatch({
-      type: OPEN_MODAL,
-      payload: { title: "Add Category", body: <ModalBody /> },
-    });
+    navigate("/categories/modal");
   };
   return (
     <div className="categories-container">

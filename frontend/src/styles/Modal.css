@@ -1,94 +1,92 @@
 .modal-container {
-    /* background: rgba(0, 0, 0, 0.7); */
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: flex-start;
-    /* align-items: center; */
-    top: 0;
-    left: 0;
-    margin-top: 1rem;
-    position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  /* align-items: center; */
+  margin-top: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .modal-wrapper {
-    top: 0;
-    right: 0;
-    position: fixed;
-    min-height: 100vh;
-    width: 100%;
-    background: #fff;
-    border-radius: 5px;
-    /* padding: 1rem; */
-    /* position: relative; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+  /* top: 0;
+  right: 0; */
+  min-height: 100vh;
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  /* padding: 1rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .modal-wrapper button:first-child {
-    position: absolute;
-    right: 20px;
-    top: 20px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .modal-title {
-    text-align: center;
+  text-align: center;
+  font-size: 2rem;
 }
 
 .modal-input {
-    height: 2rem;
-    width: 50%;
-    background: rgb(232, 241, 255);
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem;
-    margin: 1rem 0;
+  height: 2rem;
+  width: 50%;
+  background: rgb(232, 241, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 1rem 0;
 }
 
 .form-group {
-    display: flex;
-    border: 1px solid #0f1975;
-    border-radius: 5px;
-    padding: 0.5rem;
-    width: 50%;
+  display: flex;
+  border: 1px solid #0f1975;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 50%;
 }
 .form-group label {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 .modal-textarea {
-    height: 75px;
-    width: 50%;
-    background: rgb(232, 241, 255);
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem;
-    margin: 1rem 0;
+  height: 75px;
+  width: 50%;
+  background: rgb(232, 241, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 1rem 0;
 }
 .select-box {
-    height: 2rem;
-    width: 50%;
-    background: rgb(232, 241, 255);
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem;
-    margin: 1rem 0;
+  height: 2rem;
+  width: 50%;
+  background: rgb(232, 241, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 1rem 0;
 }
 .form-select-group {
-    display: flex;
-    width: 50%;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .checkbox-group {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
 }
 
 .admin-access-options {
-    width: 50%;
-    padding: 1rem;
-    background: rgb(232, 241, 255);
+  width: 50%;
+  padding: 1rem;
+  background: rgb(232, 241, 255);
 }
