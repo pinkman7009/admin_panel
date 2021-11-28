@@ -11,6 +11,16 @@ export const getNews = () => async (dispatch, token) => {
   }
 };
 
+export const getNewsById = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/news/${id}`);
+
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const addNews = (formData) => async (dispatch, token) => {
   const config = {
     headers: {
@@ -30,6 +40,22 @@ export const addNews = (formData) => async (dispatch, token) => {
 export const deleteNews = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(`/api/news/${id}`);
+
+    dispatch(getNews());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateNews = (formData, id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+    };
+
+    const res = await axios.put(`/api/news/${id}`, formData, config);
 
     dispatch(getNews());
   } catch (err) {

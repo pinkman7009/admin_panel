@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/Modal.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_MODAL } from "../../../types/modalTypes";
-import { addNews } from "../../../actions/newsAction";
+import { addNews, getNewsById, updateNews } from "../../../actions/newsAction";
 import SaveButton from "../buttons/SaveButton";
 import ViewButton from "../buttons/ViewButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchCategories } from "../../../actions/categoryActions";
 
 const NewsModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
 
   const [form, setForm] = useState({});
+  const [updateData, setUpdateData] = useState(false);
+
+  const storedState = useSelector((state) => state);
+
+  useEffect(() => {
+    if (!storedState.categories) dispatch(fetchCategories());
+
+    const fetchNewsData = async () => {
+      const news = await dispatch(getNewsById(params.id));
+
+      setForm(news);
+    };
+
+    if (params.id) {
+      fetchNewsData();
+      setUpdateData(true);
+    }
+  }, []);
 
   const { title, author, desc, desc2, image, country, city, state, category } =
     form;
@@ -21,7 +41,11 @@ const NewsModal = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addNews(form));
+
+    if (updateData === false) dispatch(addNews(form));
+    else {
+      dispatch(updateNews(form, params.id));
+    }
     navigate("/news");
   };
 
@@ -34,7 +58,9 @@ const NewsModal = () => {
     <div className="modal-container">
       <div className="modal-wrapper">
         <ViewButton handleClick={closeModal} text="Go Back" />
-        <h3 className="modal-title">Add News</h3>
+        <h3 className="modal-title">
+          {updateData === false ? "Add" : "Update"} News
+        </h3>
         <div className="form-group">
           <label htmlFor="">Upload Head Image</label>
           <input type="file" />
@@ -55,6 +81,13 @@ const NewsModal = () => {
           onChange={handleChange}
           value={author}
         />
+        <select name="category" className="select-box" onChange={handleChange}>
+          {storedState.categories?.map((item) => (
+            <option value={item._id} selected={form.category?._id === item._id}>
+              {item.value}
+            </option>
+          ))}
+        </select>
         <div className="form-group">
           <label htmlFor="">Upload Description 1 Image</label>
           <input type="file" />
@@ -77,6 +110,7 @@ const NewsModal = () => {
           onChange={handleChange}
           value={desc2}
         />
+
         <input
           name="country"
           type="text"
@@ -101,14 +135,15 @@ const NewsModal = () => {
           value={city}
           onChange={handleChange}
         />
-        <input
+        {/* <input
           name="category"
           type="text"
           placeholder="Category"
           className="modal-input"
           value={category}
           onChange={handleChange}
-        />
+        /> */}
+
         <SaveButton handleClick={handleSubmit} />
       </div>
     </div>

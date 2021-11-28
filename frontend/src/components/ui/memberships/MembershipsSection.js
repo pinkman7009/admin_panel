@@ -71,10 +71,6 @@ const MembershipsSection = () => {
   }, []);
 
   const handleClick = () => {
-    // dispatch({
-    //   type: OPEN_MODAL,
-    //   payload: { title: "Add Membership", body: <ModalBody /> },
-    // });
     navigate("/memberships/modal");
   };
   return (

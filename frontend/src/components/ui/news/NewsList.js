@@ -5,8 +5,11 @@ import DeleteButton from "../buttons/DeleteButton";
 import { useDispatch, useSelector } from "react-redux";
 import { getNews, deleteNews } from "../../../actions/newsAction";
 import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
+import { useNavigate } from "react-router-dom";
+
 const NewsList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const state = useSelector((state) => state);
 
@@ -30,38 +33,6 @@ const NewsList = () => {
   };
 
   return (
-    // <div className="news-list">
-    //   {adminNews?.map((item) => {
-    //     return (
-    //       <div key={item.id} className="news-item">
-    //         <img
-    //           src="https://news-codewithnazim.vercel.app/static/media/Blog.dec5283b.png"
-    //           alt=""
-    //         />
-    //         <div className="news-body">
-    //           <h3 className="news-title">{item.title}</h3>
-
-    //           <div className="news-body-group">
-    //             <label htmlFor="">Written by: </label>
-    //             <p>Lucy Smith</p>
-    //           </div>
-
-    //           <div className="news-body-group">
-    //             <label htmlFor="">Created at: </label>
-    //             <p>2 days ago</p>
-    //           </div>
-
-    //           {/* <p>{item.desc}</p> */}
-    //           <div className="button-group">
-    //             <ViewButton text="More details" />
-    //             <ViewButton text="Edit" />
-    //             <DeleteButton text="Delete" />
-    //           </div>
-    //         </div>
-    //       </div>
-    //     );
-    //   })}
-    // </div>
     <table>
       <thead>
         <tr>
@@ -89,8 +60,14 @@ const NewsList = () => {
               <td>{item.city}</td>
               <td>
                 <div className="button-group">
-                  <ViewButton text="Edit" />
-                  <ViewButton text="View More" />
+                  <ViewButton
+                    text="Edit"
+                    handleClick={() => navigate(`/news/modal/${item._id}`)}
+                  />
+                  <ViewButton
+                    text="View More"
+                    handleClick={() => navigate(`/news/view/${item._id}`)}
+                  />
                   <DeleteButton
                     text="Delete"
                     handleClick={() => handleDelete(item)}
