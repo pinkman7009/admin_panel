@@ -10,6 +10,7 @@ import {
   addCategories,
   fetchCategories,
 } from "../../../actions/categoryActions";
+import { useNavigate } from "react-router-dom";
 
 const ModalBody = () => {
   const dispatch = useDispatch();
@@ -44,18 +45,16 @@ const ModalBody = () => {
 
 const CategoriesSection = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    if (!state.categories) dispatch(fetchCategories());
   }, []);
 
   const handleClick = () => {
-    dispatch({
-      type: OPEN_MODAL,
-      payload: { title: "Add Category", body: <ModalBody /> },
-    });
+    navigate("/categories/modal");
   };
   return (
     <div className="categories-container">
@@ -65,7 +64,7 @@ const CategoriesSection = () => {
           <AddButton resource="Category" handleClick={handleClick} />
         </div>
 
-        <CategoriesList categories={state.categories} />
+        {state.categories && <CategoriesList categories={state.categories} />}
       </div>
     </div>
   );

@@ -5,18 +5,30 @@ import { FaUser } from "react-icons/fa";
 import { BiTime } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../../actions/roleAction";
+import AddButton from "../buttons/AddButton";
+import { useNavigate } from "react-router-dom";
+
 const CustomerDetailsSection = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getUsers());
+    if (!state.users) dispatch(getUsers());
   }, []);
+
+  const handleClick = () => {
+    navigate("/customerdetails/modal");
+  };
 
   const customerDetails = state.users?.filter((item) => item.role !== 0);
   return (
     <div className="cd-container">
+      <div className="cd-header">
+        <h3>Customer Details</h3>
+        <AddButton resource="User" handleClick={handleClick} />
+      </div>
       <div className="cd-stats">
         <div className="cd-stats-item">
           <div>

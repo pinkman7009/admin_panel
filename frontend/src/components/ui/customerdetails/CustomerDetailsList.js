@@ -1,8 +1,42 @@
 import React from "react";
 import ViewButton from "../buttons/ViewButton";
 import DeleteButton from "../buttons/DeleteButton";
+import { useDispatch } from "react-redux";
+import { blockUser } from "../../../actions/roleAction";
+import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
+import { deleteUser } from "../../../actions/roleAction";
 
 const CustomerDetailsList = ({ customers }) => {
+  const dispatch = useDispatch();
+
+  const BlockClick = (item) => {
+    dispatch({
+      type: OPEN_MODAL,
+      payload: {
+        title: `${item.blockedStatus === true ? "unblock" : "block"} user ${
+          item.firstname
+        } ${item.lastname}`,
+        handleClick: () => {
+          dispatch(blockUser(item._id));
+          dispatch({ type: CLOSE_MODAL });
+        },
+      },
+    });
+  };
+
+  const handleDelete = (item) => {
+    dispatch({
+      type: OPEN_MODAL,
+      payload: {
+        title: `delete user ${item.firstname} ${item.lastname}`,
+        handleClick: () => {
+          dispatch(deleteUser(item._id));
+          dispatch({ type: CLOSE_MODAL });
+        },
+      },
+    });
+  };
+
   return (
     <table>
       <thead>
@@ -28,8 +62,21 @@ const CustomerDetailsList = ({ customers }) => {
               <td>
                 <div className="button-group">
                   <ViewButton text="Edit" />
-                  <DeleteButton text="Delete" />
-                  <DeleteButton text="Block" />
+                  <DeleteButton
+                    text="Delete"
+                    handleClick={() => handleDelete(item)}
+                  />
+                  {item.blockedStatus ? (
+                    <DeleteButton
+                      text="UnBlock"
+                      handleClick={() => BlockClick(item)}
+                    />
+                  ) : (
+                    <DeleteButton
+                      text="Block"
+                      handleClick={() => BlockClick(item)}
+                    />
+                  )}
                 </div>
               </td>
             </tr>

@@ -13,6 +13,25 @@ export const getUsers = () => async (dispatch) => {
   }
 };
 
+export const getUserById = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/users/${id}`);
+
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const blockUser = (id) => async (dispatch) => {
+  try {
+    const res = await axios.put(`/api/users/block/${id}`);
+    dispatch(getUsers());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const deleteUser = (id) => async (dispatch) => {
   try {
     console.log(id);

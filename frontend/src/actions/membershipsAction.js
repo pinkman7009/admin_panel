@@ -26,3 +26,13 @@ export const addMemberships = (formData) => async (dispatch) => {
     console.error(err);
   }
 };
+
+export const deletePlan = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/plans/${id}`);
+
+    dispatch(fetchMemberships());
+  } catch (err) {
+    console.error(err);
+  }
+};

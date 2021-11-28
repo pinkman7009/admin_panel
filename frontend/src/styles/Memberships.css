@@ -1,52 +1,84 @@
 .memberships-container {
-  padding: 1rem;
+    padding: 1rem;
 }
 .memberships-list {
-  background: #fff;
-  border-radius: 10px;
-  padding: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
 }
 .memberships-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .membership-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
-  margin: 0 auto;
-  width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+    margin: 0 auto;
+    width: 100%;
 }
 .membership-item {
-  border: 2px solid #0f1975;
-  background: rgb(208, 220, 231);
-  border-radius: 5px;
-  padding: 0.5rem;
-  margin: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    border: 2px solid #0f1975;
+    background: rgb(208, 220, 231);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .membership-item ul {
-  margin: 0 auto;
-  list-style: none;
-  padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
 }
 .membership-item ul li {
-  padding: 1rem;
-  border-bottom: 1px solid #0f1975;
+    padding: 1rem;
+    border-bottom: 1px solid #0f1975;
 }
 .membership-item .name {
-  font-weight: bold;
-  font-size: 1.5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 .membership-item .price {
-  color: green;
-  font-weight: bold;
+    color: green;
+    font-weight: bold;
 }
 .button-group {
-  display: flex;
+    display: flex;
+}
+
+table {
+    width: 100%;
+    border-right-color: #ffffff;
+    margin-top: 100px;
+    font-size: 18px;
+    /* /* border: 1px solid #343a40; */
+    border-collapse: collapse;
+    margin: 3rem auto;
+    box-shadow: 0 11px 11px 0 rgba(0, 0, 0, 0.16);
+}
+
+th,
+td {
+    /* border: 1px solid #343a40; */
+    padding: 16px 24px;
+    text-align: center;
+}
+
+th {
+    background: #0f1975;
+    color: #fff;
+    width: 33.33%;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e9ecef;
 }
