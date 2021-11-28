@@ -34,7 +34,7 @@ const CustomerDetailsModal = () => {
     <div className="modal-container">
       <div className="modal-wrapper">
         <ViewButton handleClick={closeModal} text="Go Back" />
-        <h3 className="modal-title">Add Role</h3>
+        <h3 className="modal-title">Add Customer Details</h3>
         <input
           name="firstname"
           type="text"

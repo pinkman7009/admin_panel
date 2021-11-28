@@ -79,6 +79,25 @@ router.post(
   }
 );
 
+// GET user by ID
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      res.status(404).json({ message: "No user found" });
+    }
+
+    res.status(200).json({
+      data: user,
+    });
+  } catch (error) {
+    console.error(err.message);
+
+    res.status(500).send("server error");
+  }
+});
+
 router.put("/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -94,6 +113,7 @@ router.put("/:id", auth, async (req, res) => {
     user.roleType = req.body.roleType || user.roleType;
     user.permissions = req.body.permissions || user.permissions;
     user.phone = req.body.phone || user.phone;
+    user.roleTitle = req.body.roleTitle || user.roleTitle;
 
     await user.save();
 

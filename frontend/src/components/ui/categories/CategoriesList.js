@@ -5,9 +5,11 @@ import DeleteButton from "../buttons/DeleteButton";
 import { deleteCategory } from "../../../actions/categoryActions";
 import { useDispatch } from "react-redux";
 import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
+import { useNavigate } from "react-router-dom";
 
 const CategoriesList = ({ categories }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (item) => {
     dispatch({
@@ -39,7 +41,12 @@ const CategoriesList = ({ categories }) => {
               <td>{item.value}</td>
               <td>
                 <div className="button-group">
-                  <ViewButton text="Edit" />
+                  <ViewButton
+                    text="Edit"
+                    handleClick={() =>
+                      navigate(`/categories/modal/${item._id}`)
+                    }
+                  />
                   <DeleteButton
                     text="Delete"
                     handleClick={() => handleDelete(item)}

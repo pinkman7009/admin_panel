@@ -50,7 +50,7 @@ const CategoriesSection = () => {
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    if (!state.categories) dispatch(fetchCategories());
   }, []);
 
   const handleClick = () => {

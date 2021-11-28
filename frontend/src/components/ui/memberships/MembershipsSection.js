@@ -67,7 +67,7 @@ const MembershipsSection = () => {
 
   const state = useSelector((state) => state);
   useEffect(() => {
-    dispatch(fetchMemberships());
+    if (!state.memberships) dispatch(fetchMemberships());
   }, []);
 
   const handleClick = () => {
