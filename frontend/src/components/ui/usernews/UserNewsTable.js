@@ -8,7 +8,7 @@ const UserNewsTable = ({ userNews }) => {
   const dispatch = useDispatch();
 
   return (
-    userNews.length > 0 && (
+    userNews?.length > 0 && (
       <table>
         <thead>
           <tr>

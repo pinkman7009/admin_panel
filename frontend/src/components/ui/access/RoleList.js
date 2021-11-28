@@ -4,11 +4,13 @@ import DeleteButton from "../buttons/DeleteButton";
 import { deleteUser } from "../../../actions/roleAction";
 import { useDispatch } from "react-redux";
 import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
+import { useNavigate } from "react-router-dom";
 
 const RoleList = ({ roles }) => {
   const adminRoles = roles?.filter((item) => item.role === 0);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (item) => {
     dispatch({
@@ -43,10 +45,19 @@ const RoleList = ({ roles }) => {
               <td>{item.firstname}</td>
               <td>{item.lastname}</td>
               <td>{item.email}</td>
-              <td>{item.role === 0 ? "Admin" : "Not Admin"}</td>
+              <td>
+                {item.roleTitle
+                  ? item.roleTitle
+                  : item.role === 0
+                  ? "Admin"
+                  : "Not Admin"}
+              </td>
               <td>
                 <div className="button-group">
-                  <ViewButton text="Edit" />
+                  <ViewButton
+                    text="Edit"
+                    handleClick={() => navigate(`/access/modal/${item._id}`)}
+                  />
                   <DeleteButton
                     text="Delete"
                     handleClick={() => handleDelete(item)}

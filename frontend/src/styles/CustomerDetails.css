@@ -1,7 +1,14 @@
 .cd-container {
   padding: 1rem;
 }
-
+.cd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+}
 .cd-stats {
   display: flex;
   justify-content: center;

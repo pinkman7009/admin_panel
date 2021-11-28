@@ -110,7 +110,7 @@ const ManageAccessSection = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getUsers());
+    if (!state.users) dispatch(getUsers());
   }, []);
 
   const handleClick = () => {

@@ -11,7 +11,7 @@ const NewsList = () => {
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getNews());
+    if (!state.news) dispatch(getNews());
   }, []);
 
   const adminNews = state.news?.filter((item) => item.user.role === 0);

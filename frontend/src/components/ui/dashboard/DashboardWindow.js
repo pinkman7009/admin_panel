@@ -46,7 +46,13 @@ const DashboardWindow = () => {
             element={<CustomerDetailsModal />}
           />
           <Route exact path="/access/modal" element={<AccessModal />} />
+          <Route exact path="/access/modal/:id" element={<AccessModal />} />
           <Route exact path="/categories/modal" element={<CategoriesModal />} />
+          <Route
+            exact
+            path="/categories/modal/:id"
+            element={<CategoriesModal />}
+          />
           <Route exact path="/news/modal" element={<NewsModal />} />
           <Route
             exact

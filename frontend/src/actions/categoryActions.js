@@ -34,6 +34,16 @@ export const fetchCategories = () => async (dispatch) => {
   }
 };
 
+export const fetchCategoryById = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/categories/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addCategories = (formData) => async (dispatch) => {
   try {
     const config = {
@@ -43,6 +53,21 @@ export const addCategories = (formData) => async (dispatch) => {
     };
 
     const res = await axios.post("/api/categories", formData, config);
+    dispatch(fetchCategories());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateCategory = (formData, id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+    };
+
+    const res = await axios.put(`/api/categories/${id}`, formData, config);
     dispatch(fetchCategories());
   } catch (error) {
     console.log(error);

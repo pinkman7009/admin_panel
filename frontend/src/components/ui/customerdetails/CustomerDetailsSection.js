@@ -15,7 +15,7 @@ const CustomerDetailsSection = () => {
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getUsers());
+    if (!state.users) dispatch(getUsers());
   }, []);
 
   const handleClick = () => {
@@ -25,7 +25,10 @@ const CustomerDetailsSection = () => {
   const customerDetails = state.users?.filter((item) => item.role !== 0);
   return (
     <div className="cd-container">
-      <AddButton resource="User" handleClick={handleClick} />
+      <div className="cd-header">
+        <h3>Customer Details</h3>
+        <AddButton resource="User" handleClick={handleClick} />
+      </div>
       <div className="cd-stats">
         <div className="cd-stats-item">
           <div>

@@ -20,14 +20,14 @@ const UserNewsList = () => {
   const state = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getNews());
+    if (!state.news) dispatch(getNews());
   }, []);
 
   const userNews = state.news?.filter((item) => item.user.role === 1);
 
-  const pendingNews = userNews.filter((item) => item.status === "Pending");
-  const approvedNews = userNews.filter((item) => item.status === "Accepted");
-  const deniedNews = userNews.filter((item) => item.status === "Denied");
+  const pendingNews = userNews?.filter((item) => item.status === "Pending");
+  const approvedNews = userNews?.filter((item) => item.status === "Accepted");
+  const deniedNews = userNews?.filter((item) => item.status === "Denied");
 
   return (
     <>
