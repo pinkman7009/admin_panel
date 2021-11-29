@@ -27,17 +27,17 @@ const Mainscreen = () => {
     },
   ];
 
-  if (state.userDetails.permissions.includes("MANAGE_ACCESS"))
+  if (state.userDetails?.permissions.includes("MANAGE_ACCESS"))
     adminLinks.push({
       title: "Manage Role",
       route: "/access",
     });
-  if (state.userDetails.permissions.includes("CATEGORIES"))
+  if (state.userDetails?.permissions.includes("CATEGORIES"))
     adminLinks.push({
       title: "Categories",
       route: "/categories",
     });
-  if (state.userDetails.permissions.includes("NEWS"))
+  if (state.userDetails?.permissions.includes("NEWS"))
     adminLinks.push(
       {
         title: "User News",
@@ -48,7 +48,7 @@ const Mainscreen = () => {
         route: "/news",
       }
     );
-  if (state.userDetails.permissions.includes("MEMBERSHIP_PLAN"))
+  if (state.userDetails?.permissions.includes("MEMBERSHIP_PLAN"))
     adminLinks.push({
       title: "Memberships",
       route: "/memberships",
