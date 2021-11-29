@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/Modal.css";
 import { useDispatch } from "react-redux";
 import { CLOSE_MODAL } from "../../../types/modalTypes";
 import ViewButton from "../buttons/ViewButton";
-import { addRole } from "../../../actions/registerAction";
+import { addRole, updateRole } from "../../../actions/registerAction";
+import { getUserById } from "../../../actions/roleAction";
 import SaveButton from "../buttons/SaveButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CustomerDetailsModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+
   const [form, setForm] = useState({});
+  const [updateData, setUpdateData] = useState(false);
+
+  useEffect(() => {
+    const fetchCustomerDetails = async () => {
+      const customer = await dispatch(getUserById(params.id));
+
+      setForm(customer.data);
+    };
+
+    if (params.id) {
+      fetchCustomerDetails();
+      setUpdateData(true);
+    }
+  }, []);
 
   const { firstname, lastname, email, password, phone } = form;
 
@@ -21,7 +38,12 @@ const CustomerDetailsModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     form.role = 1;
-    dispatch(addRole(form));
+
+    if (updateData === false) {
+      dispatch(addRole(form));
+    } else {
+      dispatch(updateRole(form, params.id));
+    }
     dispatch({ type: CLOSE_MODAL });
     navigate("/customerdetails");
   };
@@ -34,7 +56,9 @@ const CustomerDetailsModal = () => {
     <div className="modal-container">
       <div className="modal-wrapper">
         <ViewButton handleClick={closeModal} text="Go Back" />
-        <h3 className="modal-title">Add Customer Details</h3>
+        <h3 className="modal-title">
+          {updateData === false ? "Add" : "Update"} Customer Details
+        </h3>
         <input
           name="firstname"
           type="text"
@@ -59,14 +83,17 @@ const CustomerDetailsModal = () => {
           value={email}
           onChange={handleChange}
         />
-        <input
-          name="password"
-          type="password"
-          placeholder="Enter password"
-          className="modal-input"
-          value={password}
-          onChange={handleChange}
-        />
+        {updateData === false && (
+          <input
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            className="modal-input"
+            value={password}
+            onChange={handleChange}
+          />
+        )}
+
         <input
           name="phone"
           type="text"

@@ -1,39 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { DateTime } from "luxon";
 import { FaUser, FaMoneyBillWaveAlt, FaRegNewspaper } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { getNews } from "../../../actions/newsAction";
+import "../../../styles/Dashboard.css";
 
 const DashboardSection = () => {
-  const latestNews = [
-    {
-      id: 1,
-      title: "News Title 1",
-      category: "Sports",
-      date: "20th November, 2021",
-    },
-    {
-      id: 2,
-      title: "News Title 2",
-      category: "Sports",
-      date: "20th November, 2021",
-    },
-    {
-      id: 3,
-      title: "News Title 3",
-      category: "Sports",
-      date: "20th November, 2021",
-    },
-    {
-      id: 4,
-      title: "News Title 4",
-      category: "Sports",
-      date: "20th November, 2021",
-    },
-    {
-      id: 5,
-      title: "News Title 5",
-      category: "Sports",
-      date: "20th November, 2021",
-    },
-  ];
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
+  useEffect(() => {
+    if (!state.news) dispatch(getNews());
+  }, []);
+
+  const latestNews = state.news?.slice(0, 5);
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-section">
@@ -79,13 +60,16 @@ const DashboardSection = () => {
           </thead>
 
           <tbody>
-            {latestNews.map((item) => {
+            {latestNews?.map((item, index) => {
+              const dt = DateTime.fromISO(item.date);
+              console.log({ date: item.date });
+              console.log({ dt });
               return (
-                <tr>
-                  <td>{item.id}</td>
+                <tr key={item._id}>
+                  <td>{index + 1}</td>
                   <td>{item.title}</td>
-                  <td>{item.category}</td>
-                  <td>{item.date}</td>
+                  <td>{item.category.value}</td>
+                  <td>{dt.toLocaleString(DateTime.DATETIME_MED)}</td>
                 </tr>
               );
             })}

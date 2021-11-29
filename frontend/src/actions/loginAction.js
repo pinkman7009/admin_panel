@@ -17,8 +17,6 @@ export const login = (formData) => async (dispatch) => {
     const res = await axios.post("/api/login", formData, config);
 
     dispatch({ type: LOGIN_SUCCESS, payload: res });
-
-    console.log({ res });
   } catch (err) {
     console.error(err);
   }

@@ -100,8 +100,8 @@
   margin: 1rem 0;
 }
 .select-box {
-  height: 2rem;
-  width: 50%;
+  height: 3rem;
+  width: 51%;
   background: rgb(232, 241, 255);
   border: none;
   border-radius: 5px;
@@ -129,4 +129,22 @@
   width: 50%;
   padding: 1rem;
   background: rgb(232, 241, 255);
+}
+
+.news-modal-content {
+  width: 60%;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.news-content-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
+.news-content-item p {
+  margin-left: 2rem;
+  width: 70%;
 }
