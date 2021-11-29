@@ -13,6 +13,8 @@ import Toast from "../../ui/Toast";
 import AccessModal from "../modals/AccessModal";
 import CategoriesModal from "../modals/CategoriesModal";
 import NewsModal from "../modals/NewsModal";
+import ViewNewsModal from "../modals/ViewNewsModal";
+import ViewUserNewsModal from "../modals/ViewUserNewsModal";
 import CustomerDetailsModal from "../modals/CustomerDetailsModal";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -45,6 +47,11 @@ const DashboardWindow = () => {
             path="/customerdetails/modal"
             element={<CustomerDetailsModal />}
           />
+          <Route
+            exact
+            path="/customerdetails/modal/:id"
+            element={<CustomerDetailsModal />}
+          />
           <Route exact path="/access/modal" element={<AccessModal />} />
           <Route exact path="/access/modal/:id" element={<AccessModal />} />
           <Route exact path="/categories/modal" element={<CategoriesModal />} />
@@ -54,9 +61,21 @@ const DashboardWindow = () => {
             element={<CategoriesModal />}
           />
           <Route exact path="/news/modal" element={<NewsModal />} />
+          <Route exact path="/news/modal/:id" element={<NewsModal />} />
+          <Route exact path="/news/view/:id" element={<ViewNewsModal />} />
+          <Route
+            exact
+            path="/usernews/view/:id"
+            element={<ViewUserNewsModal />}
+          />
           <Route
             exact
             path="/memberships/modal"
+            element={<MembershipsModal />}
+          />
+          <Route
+            exact
+            path="/memberships/modal/:id"
             element={<MembershipsModal />}
           />
         </Routes>

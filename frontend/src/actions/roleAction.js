@@ -6,8 +6,6 @@ export const getUsers = () => async (dispatch) => {
     const res = await axios.get("/api/manageaccess");
 
     dispatch({ type: GET_ROLES, payload: res.data });
-
-    console.log({ res });
   } catch (err) {
     console.error(err);
   }
@@ -34,7 +32,6 @@ export const blockUser = (id) => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
   try {
-    console.log(id);
     const res = await axios.delete(`/api/users/${id}`);
     dispatch(getUsers());
   } catch (err) {

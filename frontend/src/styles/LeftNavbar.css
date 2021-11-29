@@ -12,7 +12,7 @@
   padding: 0 !important;
   margin: 0 !important;
 }
-.active {
+.active .link-group {
   background: #1d2aa7;
 }
 .links-wrapper .links-list > a {

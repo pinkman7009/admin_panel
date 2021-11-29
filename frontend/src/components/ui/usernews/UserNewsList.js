@@ -65,11 +65,11 @@ const UserNewsList = () => {
         </button>
       </div>
       {pending === true ? (
-        <UserNewsTable userNews={pendingNews} />
+        <UserNewsTable userNews={pendingNews} pendingNews={true} />
       ) : approved === true ? (
-        <UserNewsTable userNews={approvedNews} />
+        <UserNewsTable userNews={approvedNews} pendingNews={false} />
       ) : (
-        <UserNewsTable userNews={deniedNews} />
+        <UserNewsTable userNews={deniedNews} pendingNews={false} />
       )}
     </>
   );
