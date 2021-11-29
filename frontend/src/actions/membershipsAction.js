@@ -11,6 +11,16 @@ export const fetchMemberships = () => async (dispatch) => {
   }
 };
 
+export const fetchMembershipById = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/plans/${id}`);
+
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const addMemberships = (formData) => async (dispatch) => {
   const config = {
     headers: {
@@ -20,6 +30,22 @@ export const addMemberships = (formData) => async (dispatch) => {
 
   try {
     const res = await axios.post("/api/plans", formData, config);
+
+    dispatch(fetchMemberships());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateMembership = (formData, id) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "Application/json",
+    },
+  };
+
+  try {
+    const res = await axios.put(`/api/plans/${id}`, formData, config);
 
     dispatch(fetchMemberships());
   } catch (err) {

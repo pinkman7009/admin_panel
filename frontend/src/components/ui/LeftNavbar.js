@@ -23,9 +23,9 @@ const LeftNavbar = ({ links }) => {
     <div className="links-wrapper">
       <img src="./logo.png" alt="logo" className="logo-style" />
       <div className="links-list">
-        {links.map((link) => {
+        {links.map((link, index) => {
           return (
-            <NavLink to={link.route} activeClassName="active">
+            <NavLink to={link.route} activeClassName="active" key={index}>
               <div className="link-group">
                 {iconGroup(link.title)}
                 <p>{link.title}</p>

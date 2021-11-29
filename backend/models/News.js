@@ -25,6 +25,7 @@ const NewsSchema = mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Categories",
+    required: true,
   },
   status: {
     type: String,

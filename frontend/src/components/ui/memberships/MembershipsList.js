@@ -6,9 +6,11 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
 import { useDispatch } from "react-redux";
 import { deletePlan } from "../../../actions/membershipsAction";
+import { useNavigate } from "react-router-dom";
 
 const MembershipsList = ({ memberships }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (item) => {
     dispatch({
@@ -40,7 +42,7 @@ const MembershipsList = ({ memberships }) => {
       <tbody>
         {memberships?.map((item, index) => {
           return (
-            <tr>
+            <tr key={item._id}>
               <td>{index + 1}</td>
               <td>{item.name}</td>
               <td>{item.price}</td>
@@ -50,7 +52,12 @@ const MembershipsList = ({ memberships }) => {
               <td>{item.canDeletePost ? <FaCheck /> : <FaTimes />}</td>
               <td>
                 <div className="button-group">
-                  <ViewButton text="Edit" />
+                  <ViewButton
+                    text="Edit"
+                    handleClick={() =>
+                      navigate(`/memberships/modal/${item._id}`)
+                    }
+                  />
                   <DeleteButton
                     text="Delete"
                     handleClick={() => handleDelete(item)}

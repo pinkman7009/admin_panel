@@ -3,9 +3,11 @@ import ViewButton from "../buttons/ViewButton";
 import DeleteButton from "../buttons/DeleteButton";
 import { useDispatch, useSelector } from "react-redux";
 import { denyUserNews, approveUserNews } from "../../../actions/newsAction";
+import { useNavigate } from "react-router-dom";
 
-const UserNewsTable = ({ userNews }) => {
+const UserNewsTable = ({ userNews, pendingNews }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     userNews?.length > 0 && (
@@ -37,14 +39,23 @@ const UserNewsTable = ({ userNews }) => {
                 <td>
                   <div className="button-group">
                     <ViewButton
-                      text="Approve"
-                      handleClick={() => dispatch(approveUserNews(item._id))}
+                      text="View More"
+                      handleClick={() => navigate(`/usernews/view/${item._id}`)}
                     />
-                    <ViewButton text="View More" />
-                    <DeleteButton
-                      text="Deny"
-                      handleClick={() => dispatch(denyUserNews(item._id))}
-                    />
+                    {pendingNews === true && (
+                      <>
+                        <ViewButton
+                          text="Approve"
+                          handleClick={() =>
+                            dispatch(approveUserNews(item._id))
+                          }
+                        />
+                        <DeleteButton
+                          text="Deny"
+                          handleClick={() => dispatch(denyUserNews(item._id))}
+                        />
+                      </>
+                    )}
                   </div>
                 </td>
               </tr>

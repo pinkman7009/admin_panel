@@ -89,7 +89,7 @@ td {
 th {
   background: #0f1975;
   color: #fff;
-  width: 16.66%;
+  width: 25% !important;
 }
 
 tbody tr:nth-child(odd) {
