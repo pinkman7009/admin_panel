@@ -11,55 +11,6 @@ import {
 } from "../../../actions/membershipsAction";
 import { useNavigate } from "react-router-dom";
 
-const ModalBody = () => {
-  const dispatch = useDispatch();
-
-  const [form, setForm] = useState({});
-
-  const { name, price } = form;
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(addMemberships(form));
-    dispatch({ type: CLOSE_MODAL });
-  };
-
-  return (
-    <>
-      <input
-        name="name"
-        type="text"
-        placeholder="Plan name"
-        className="modal-input"
-        value={name}
-        onChange={handleChange}
-      />
-      <input
-        name="price"
-        type="number"
-        placeholder="Plan price"
-        className="modal-input"
-        value={price}
-        onChange={handleChange}
-      />
-      <div className="admin-access-options">
-        <div className="checkbox-group">
-          <label htmlFor="">Upload Video with HD Resolution</label>
-          <input type="checkbox" />
-        </div>
-        <div className="checkbox-group">
-          <label htmlFor="">Attachment & Post Scheduling</label>
-          <input type="checkbox" />
-        </div>
-      </div>
-      <SaveButton handleClick={handleSubmit} />
-    </>
-  );
-};
-
 const MembershipsSection = () => {
   const dispatch = useDispatch();
 

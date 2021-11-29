@@ -42,6 +42,9 @@ const NewsModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (form.category === null) {
+      form.category = storedState.categories[0]._id;
+    }
     if (updateData === false) dispatch(addNews(form));
     else {
       dispatch(updateNews(form, params.id));
@@ -82,11 +85,16 @@ const NewsModal = () => {
           value={author}
         />
         <select name="category" className="select-box" onChange={handleChange}>
-          {storedState.categories?.map((item) => (
-            <option value={item._id} selected={form.category?._id === item._id}>
-              {item.value}
-            </option>
-          ))}
+          {storedState.categories?.map((item) => {
+            return (
+              <option
+                value={item._id}
+                selected={form.category?._id === item._id}
+              >
+                {item.value}
+              </option>
+            );
+          })}
         </select>
         <div className="form-group">
           <label htmlFor="">Upload Description 1 Image</label>
@@ -135,15 +143,6 @@ const NewsModal = () => {
           value={city}
           onChange={handleChange}
         />
-        {/* <input
-          name="category"
-          type="text"
-          placeholder="Category"
-          className="modal-input"
-          value={category}
-          onChange={handleChange}
-        /> */}
-
         <SaveButton handleClick={handleSubmit} />
       </div>
     </div>

@@ -54,7 +54,7 @@ const NewsList = () => {
               <td>{index + 1}</td>
               <td>{item.title}</td>
               <td>{item.author}</td>
-              <td>{item.category.value}</td>
+              <td>{item.category?.value}</td>
               <td>{item.country}</td>
               <td>{item.state}</td>
               <td>{item.city}</td>

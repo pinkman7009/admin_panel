@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import { blockUser } from "../../../actions/roleAction";
 import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
 import { deleteUser } from "../../../actions/roleAction";
+import { useNavigate } from "react-router-dom";
 
 const CustomerDetailsList = ({ customers }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const BlockClick = (item) => {
     dispatch({
@@ -61,7 +63,12 @@ const CustomerDetailsList = ({ customers }) => {
               <td>{item.phone}</td>
               <td>
                 <div className="button-group">
-                  <ViewButton text="Edit" />
+                  <ViewButton
+                    text="Edit"
+                    handleClick={() =>
+                      navigate(`/customerdetails/modal/${item._id}`)
+                    }
+                  />
                   <DeleteButton
                     text="Delete"
                     handleClick={() => handleDelete(item)}

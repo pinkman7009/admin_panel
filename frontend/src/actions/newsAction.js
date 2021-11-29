@@ -6,6 +6,8 @@ export const getNews = () => async (dispatch, token) => {
     const res = await axios.get("/api/news");
 
     dispatch({ type: GET_NEWS, payload: res.data });
+
+    console.log(res.data);
   } catch (err) {
     console.error(err);
   }
