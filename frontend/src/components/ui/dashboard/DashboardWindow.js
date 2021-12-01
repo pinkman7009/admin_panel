@@ -8,6 +8,7 @@ import CustomerDetailsSection from "../customerdetails/CustomerDetailsSection";
 import NewsSection from "../news/NewsSection";
 import UserNewsSection from "../usernews/UserNewsSection";
 import MembershipsSection from "../memberships/MembershipsSection";
+import SettingsSection from "../settings/SettingsSection";
 import "../../../styles/Dashboard.css";
 import Toast from "../../ui/Toast";
 import AccessModal from "../modals/AccessModal";
@@ -40,6 +41,7 @@ const DashboardWindow = () => {
           <Route exact path="/news" element={<NewsSection />} />
           <Route exact path="/usernews" element={<UserNewsSection />} />
           <Route exact path="/memberships" element={<MembershipsSection />} />
+          <Route exact path="/settings" element={<SettingsSection />} />
 
           {/* Modals */}
           <Route
