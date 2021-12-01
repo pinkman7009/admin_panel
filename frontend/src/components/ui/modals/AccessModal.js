@@ -31,14 +31,20 @@ const AccessModal = () => {
   }, []);
 
   const { firstname, lastname, email, password, roleTitle } = form;
+  const permissions = [];
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handlePermissions = (e) => {
+    permissions.push(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     form.role = 0;
+    form.permissions = permissions;
     if (updateData === false) {
       dispatch(addRole(form));
     } else {
@@ -110,23 +116,43 @@ const AccessModal = () => {
           <div className="admin-access-options">
             <div className="checkbox-group">
               <label htmlFor="">Manage Access</label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                value="MANAGE_ACCESS"
+                onChange={handlePermissions}
+              />
             </div>
             <div className="checkbox-group">
               <label htmlFor="">Categories</label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                value="CATEGORIES"
+                onChange={handlePermissions}
+              />
             </div>
             <div className="checkbox-group">
               <label htmlFor="">News</label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                value="NEWS"
+                onChange={handlePermissions}
+              />
             </div>
             <div className="checkbox-group">
               <label htmlFor="">Customer Details</label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                value="CUSTOMER_DETAILS"
+                onChange={handlePermissions}
+              />
             </div>
             <div className="checkbox-group">
               <label htmlFor="">Memberships</label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                value="MEMBERSHIP_PLAN"
+                onChange={handlePermissions}
+              />
             </div>
           </div>
         ) : null}

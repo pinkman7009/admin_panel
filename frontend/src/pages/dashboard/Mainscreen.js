@@ -21,11 +21,13 @@ const Mainscreen = () => {
       title: "Dashboard",
       route: "/dashboard",
     },
-    {
+  ];
+
+  if (state.userDetails?.permissions.includes("CUSTOMER_DETAILS"))
+    adminLinks.push({
       title: "Customer Details",
       route: "/customerdetails",
-    },
-  ];
+    });
 
   if (state.userDetails?.permissions.includes("MANAGE_ACCESS"))
     adminLinks.push({

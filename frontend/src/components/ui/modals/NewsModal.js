@@ -3,7 +3,6 @@ import "quill/dist/quill.snow.css";
 import "../../../styles/News.css";
 import "../../../styles/Modal.css";
 import { useDispatch, useSelector } from "react-redux";
-import { CLOSE_MODAL } from "../../../types/modalTypes";
 import { addNews, getNewsById, updateNews } from "../../../actions/newsAction";
 import Quill from "quill";
 import SaveButton from "../buttons/SaveButton";
@@ -11,6 +10,7 @@ import ViewButton from "../buttons/ViewButton";
 import TextEditor from "../news/TextEditor";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchCategories } from "../../../actions/categoryActions";
+import { TiTimes } from "react-icons/ti";
 
 const NewsModal = () => {
   const dispatch = useDispatch();
@@ -73,6 +73,7 @@ const NewsModal = () => {
   }, []);
 
   const [form, setForm] = useState({});
+  const [tag, setTag] = useState("");
   const [updateData, setUpdateData] = useState(false);
 
   const storedState = useSelector((state) => state);
@@ -92,8 +93,17 @@ const NewsModal = () => {
     }
   }, []);
 
-  const { title, author, image, country, city, state, category, desc, desc2 } =
-    form;
+
+  const { title, author, desc, desc2, image, country, city, state } = form;
+
+  const [tags, setTags] = useState([]);
+
+  const handleTags = (e) => {
+    setTags([...tags, tag]);
+    console.log(tags);
+    setTag("");
+  };
+
 
   useEffect(() => {
     if (desc) quill.root.innerHTML = desc;
@@ -101,15 +111,17 @@ const NewsModal = () => {
   }, [desc, desc2]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    if (e.target.name === "tag") {
+      setTag(e.target.value);
+    } else setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
 
     form.desc = quill.root.innerHTML;
     form.desc2 = quill2.root.innerHTML;
+    form.tags = tags;
 
-    console.log({ form });
     if (form.category === null) {
       form.category = storedState.categories[0]._id;
     }
@@ -176,8 +188,29 @@ const NewsModal = () => {
           <div ref={wrapperRef} className="text-editor-wrapper"></div>
         </div>
 
+
         <div className="text-editor-container">
           <div ref={wrapperRef2} className="text-editor-wrapper"></div>
+
+        <div className="tag-div">
+          <input
+            name="tag"
+            type="text"
+            placeholder="Add Tags"
+            className="modal-input"
+            value={tag}
+            onChange={handleChange}
+          />
+          <SaveButton text="Add" handleClick={handleTags} />
+        </div>
+        <div className="tag-list">
+          {tags.map((tag) => {
+            return (
+              <div className="tags">
+                <div>{tag}</div>
+              </div>
+            );
+          })}
         </div>
 
         <input
