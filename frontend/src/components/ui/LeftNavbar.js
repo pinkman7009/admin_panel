@@ -7,6 +7,7 @@ import {
   MdFormatListBulleted,
   MdCardMembership,
 } from "react-icons/md";
+import { IoSettings } from "react-icons/io5";
 import { FaUserEdit, FaRegNewspaper } from "react-icons/fa";
 
 const LeftNavbar = ({ links }) => {
@@ -18,6 +19,7 @@ const LeftNavbar = ({ links }) => {
     else if (title === "News" || title === "User News")
       return <FaRegNewspaper />;
     else if (title === "Memberships") return <MdCardMembership />;
+    else if (title === "Settings") return <IoSettings />;
   };
   return (
     <div className="links-wrapper">
