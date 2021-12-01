@@ -16,7 +16,7 @@ const SettingsSection = () => {
           }
           onClick={() => onClick("Private Policy")}
         >
-          Pending
+          Private Policy
         </button>
         <button
           className={
@@ -24,7 +24,7 @@ const SettingsSection = () => {
           }
           onClick={() => onClick("Terms & Condition")}
         >
-          Approved
+          Terms & Conditions
         </button>
         <button
           className={
@@ -32,7 +32,7 @@ const SettingsSection = () => {
           }
           onClick={() => onClick("Contact Us")}
         >
-          Denied
+          Contact Us
         </button>
       </div>
       {/* {now === "Private Policy" ? (
