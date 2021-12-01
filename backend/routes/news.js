@@ -46,7 +46,7 @@ route.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, desc, desc2, country, city, state, category, author } =
+    const { title, desc, desc2, country, city, state, category, author, tags } =
       req.body;
 
     try {
@@ -91,6 +91,7 @@ route.post(
         author,
         user: req.user.id,
         status,
+        tags,
       });
 
       await news.save();

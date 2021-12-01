@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../../../styles/Modal.css";
 import { useDispatch, useSelector } from "react-redux";
-import { CLOSE_MODAL } from "../../../types/modalTypes";
 import { addNews, getNewsById, updateNews } from "../../../actions/newsAction";
 import SaveButton from "../buttons/SaveButton";
 import ViewButton from "../buttons/ViewButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchCategories } from "../../../actions/categoryActions";
+import { TiTimes } from "react-icons/ti";
 
 const NewsModal = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const NewsModal = () => {
   const params = useParams();
 
   const [form, setForm] = useState({});
+  const [tag, setTag] = useState("");
   const [updateData, setUpdateData] = useState(false);
 
   const storedState = useSelector((state) => state);
@@ -33,15 +34,24 @@ const NewsModal = () => {
     }
   }, []);
 
-  const { title, author, desc, desc2, image, country, city, state, category } =
-    form;
+  const { title, author, desc, desc2, image, country, city, state } = form;
+
+  const [tags, setTags] = useState([]);
+
+  const handleTags = (e) => {
+    setTags([...tags, tag]);
+    console.log(tags);
+    setTag("");
+  };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    if (e.target.name === "tag") {
+      setTag(e.target.value);
+    } else setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    form.tags = tags;
     if (form.category === null) {
       form.category = storedState.categories[0]._id;
     }
@@ -118,6 +128,26 @@ const NewsModal = () => {
           onChange={handleChange}
           value={desc2}
         />
+        <div className="tag-div">
+          <input
+            name="tag"
+            type="text"
+            placeholder="Add Tags"
+            className="modal-input"
+            value={tag}
+            onChange={handleChange}
+          />
+          <SaveButton text="Add" handleClick={handleTags} />
+        </div>
+        <div className="tag-list">
+          {tags.map((tag) => {
+            return (
+              <div className="tags">
+                <div>{tag}</div>
+              </div>
+            );
+          })}
+        </div>
 
         <input
           name="country"
