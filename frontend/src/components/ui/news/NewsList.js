@@ -17,6 +17,7 @@ const NewsList = () => {
     if (!state.news) dispatch(getNews());
   }, []);
 
+  console.log({ news: state.news });
   const adminNews = state.news?.filter((item) => item.user.role === 0);
 
   const handleDelete = (item) => {

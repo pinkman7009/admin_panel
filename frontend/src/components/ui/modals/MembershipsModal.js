@@ -57,7 +57,11 @@ const MembershipsModal = () => {
   return (
     <div className="modal-container">
       <div className="modal-wrapper">
-        <ViewButton handleClick={closeModal} text="Go Back" />
+        <ViewButton
+          handleClick={closeModal}
+          text="Go Back"
+          className="go-back-btn"
+        />
         <h3 className="modal-title">
           {updateData === false ? "Add" : "Update"} Memberships
         </h3>

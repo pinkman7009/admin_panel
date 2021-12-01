@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import "quill/dist/quill.snow.css";
+import "../../../styles/News.css";
 import "../../../styles/Modal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_MODAL } from "../../../types/modalTypes";
 import { addNews, getNewsById, updateNews } from "../../../actions/newsAction";
+import Quill from "quill";
 import SaveButton from "../buttons/SaveButton";
 import ViewButton from "../buttons/ViewButton";
+import TextEditor from "../news/TextEditor";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchCategories } from "../../../actions/categoryActions";
 
@@ -12,6 +16,61 @@ const NewsModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
+
+  const [quill, setQuill] = useState("");
+  const [quill2, setQuill2] = useState("");
+
+  const wrapperRef = useCallback((wrapper) => {
+    if (wrapper === null) {
+      return;
+    }
+    wrapper.innerHTML = "";
+    const editor = document.createElement("div");
+    wrapper.append(editor);
+
+    const toolbarOptions = [
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+    ];
+
+    const q = new Quill(editor, {
+      theme: "snow",
+      modules: {
+        toolbar: toolbarOptions,
+      },
+      placeholder: "Enter description",
+    });
+
+    setQuill(q);
+
+    // if (desc) quill.root.innerHTML = desc;
+  }, []);
+
+  const wrapperRef2 = useCallback((wrapper) => {
+    if (wrapper === null) {
+      return;
+    }
+    wrapper.innerHTML = "";
+    const editor = document.createElement("div");
+    wrapper.append(editor);
+
+    const toolbarOptions = [
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+    ];
+
+    const q = new Quill(editor, {
+      theme: "snow",
+      modules: {
+        toolbar: toolbarOptions,
+      },
+      placeholder: "Enter description",
+    });
+
+    setQuill2(q);
+
+    // if (desc2) quill2.root.innerHTML = desc2;
+  }, []);
 
   const [form, setForm] = useState({});
   const [updateData, setUpdateData] = useState(false);
@@ -33,8 +92,13 @@ const NewsModal = () => {
     }
   }, []);
 
-  const { title, author, desc, desc2, image, country, city, state, category } =
+  const { title, author, image, country, city, state, category, desc, desc2 } =
     form;
+
+  useEffect(() => {
+    if (desc) quill.root.innerHTML = desc;
+    if (desc2) quill2.root.innerHTML = desc2;
+  }, [desc, desc2]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -42,6 +106,10 @@ const NewsModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    form.desc = quill.root.innerHTML;
+    form.desc2 = quill2.root.innerHTML;
+
+    console.log({ form });
     if (form.category === null) {
       form.category = storedState.categories[0]._id;
     }
@@ -53,14 +121,17 @@ const NewsModal = () => {
   };
 
   const closeModal = () => {
-    // dispatch({ type: CLOSE_MODAL, payload: null });
     navigate("/news");
   };
 
   return (
     <div className="modal-container">
       <div className="modal-wrapper">
-        <ViewButton handleClick={closeModal} text="Go Back" />
+        <ViewButton
+          handleClick={closeModal}
+          text="Go Back"
+          className="go-back-btn"
+        />
         <h3 className="modal-title">
           {updateData === false ? "Add" : "Update"} News
         </h3>
@@ -101,23 +172,13 @@ const NewsModal = () => {
           <input type="file" />
         </div>
 
-        <textarea
-          name="desc"
-          type="text"
-          placeholder="Enter description 1"
-          className="modal-textarea"
-          onChange={handleChange}
-          value={desc}
-        />
+        <div className="text-editor-container">
+          <div ref={wrapperRef} className="text-editor-wrapper"></div>
+        </div>
 
-        <textarea
-          name="desc2"
-          type="text"
-          placeholder="Enter description 2"
-          className="modal-textarea"
-          onChange={handleChange}
-          value={desc2}
-        />
+        <div className="text-editor-container">
+          <div ref={wrapperRef2} className="text-editor-wrapper"></div>
+        </div>
 
         <input
           name="country"
