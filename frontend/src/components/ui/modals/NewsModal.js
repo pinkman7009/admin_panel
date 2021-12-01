@@ -93,7 +93,6 @@ const NewsModal = () => {
     }
   }, []);
 
-
   const { title, author, desc, desc2, image, country, city, state } = form;
 
   const [tags, setTags] = useState([]);
@@ -103,7 +102,6 @@ const NewsModal = () => {
     console.log(tags);
     setTag("");
   };
-
 
   useEffect(() => {
     if (desc) quill.root.innerHTML = desc;
@@ -188,9 +186,9 @@ const NewsModal = () => {
           <div ref={wrapperRef} className="text-editor-wrapper"></div>
         </div>
 
-
         <div className="text-editor-container">
           <div ref={wrapperRef2} className="text-editor-wrapper"></div>
+        </div>
 
         <div className="tag-div">
           <input

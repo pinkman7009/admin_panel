@@ -64,7 +64,7 @@ const ViewNewsModal = () => {
             alt=""
           />
 
-          <div className="news-content-item">
+          <div className="news-content-item description-news-item">
             <h4>Description 1</h4>
             <div dangerouslySetInnerHTML={{ __html: desc }}></div>
           </div>
