@@ -17,6 +17,7 @@ const NewsSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  tags: [String],
   desc2: String,
   image: String,
   country: String,

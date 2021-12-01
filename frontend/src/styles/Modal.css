@@ -51,7 +51,7 @@
   position: relative;
 }
 
-.modal-wrapper button:first-child {
+.modal-wrapper .go-back-btn {
   position: absolute;
   right: 20px;
   top: 20px;
@@ -147,4 +147,20 @@
 .news-content-item p {
   margin-left: 2rem;
   width: 70%;
+}
+
+.tag-div {
+  display: flex;
+}
+
+.tag-list {
+  display: flex;
+}
+
+.tags {
+  font-size: smaller;
+  margin: 0 5px;
+  padding: 5px 5px;
+  background-color: rgb(232, 241, 255);
+  display: flex;
 }

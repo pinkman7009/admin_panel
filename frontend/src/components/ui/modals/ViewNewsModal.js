@@ -36,7 +36,11 @@ const ViewNewsModal = () => {
   return (
     <div className="modal-container">
       <div className="modal-wrapper">
-        <ViewButton handleClick={closeModal} text="Go Back" />
+        <ViewButton
+          handleClick={closeModal}
+          text="Go Back"
+          className="go-back-btn"
+        />
 
         <div className="news-modal-content">
           <h3 className="modal-title">{title}</h3>
@@ -60,14 +64,14 @@ const ViewNewsModal = () => {
             alt=""
           />
 
-          <div className="news-content-item">
+          <div className="news-content-item description-news-item">
             <h4>Description 1</h4>
-            <p>{desc && desc}</p>
+            <div dangerouslySetInnerHTML={{ __html: desc }}></div>
           </div>
 
           <div className="news-content-item">
             <h4>Description 2</h4>
-            <p>{desc2 && desc2}</p>
+            <div dangerouslySetInnerHTML={{ __html: desc2 }}></div>
           </div>
 
           <div className="news-content-item">

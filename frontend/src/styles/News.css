@@ -64,3 +64,11 @@
   background: #0f1975;
   color: #fff;
 }
+.text-editor-container {
+  width: 51%;
+  margin: 3rem;
+  height: 100px;
+}
+.text-editor-container > * {
+  height: 100px;
+}
