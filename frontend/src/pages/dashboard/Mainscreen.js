@@ -56,6 +56,11 @@ const Mainscreen = () => {
       route: "/memberships",
     });
 
+  adminLinks.push({
+    title: "Settings",
+    route: "/settings",
+  });
+
   return (
     <div className="main-window">
       <LeftNavbar links={adminLinks} />
