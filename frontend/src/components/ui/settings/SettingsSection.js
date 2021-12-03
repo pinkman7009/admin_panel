@@ -35,13 +35,13 @@ const SettingsSection = () => {
           Contact Us
         </button>
       </div>
-      {/* {now === "Private Policy" ? (
+      {now === "Private Policy" ? (
         <p>Data for Private Policy</p>
       ) : now === "Terms & Condition" ? (
         <p>Data for Terms and Conditions</p>
       ) : (
         <p>Data for Contact Us</p>
-      )} */}
+      )}
     </>
   );
 };
