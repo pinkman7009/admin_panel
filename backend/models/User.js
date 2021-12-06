@@ -34,6 +34,15 @@ const UserSchema = mongoose.Schema({
     default: [],
     required: false,
   },
+  categories_permissions: [
+    {
+      category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categories",
+        required: true,
+      },
+    },
+  ],
   blockedStatus: {
     type: Boolean,
     required: true,

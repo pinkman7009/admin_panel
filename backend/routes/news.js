@@ -50,7 +50,14 @@ route.post(
       req.body;
 
     try {
-      const user = await User.findById(req.user.id).select("-password");
+      const user = await User.findById(req.user.id)
+        .select("-password")
+        .populate({
+          path: "categoroes_permissions",
+          populate: {
+            path: "category",
+          },
+        });
 
       if (!user) {
         return res.status(400).json({ msg: "User not found" });
@@ -75,6 +82,18 @@ route.post(
 
         if (!p) {
           return res.status(400).json({ msg: "No Permission to access" });
+        }
+
+        user.categories_permissions.forEach((cat_p) => {
+          if (cat_p.category.value === category) {
+            p === true;
+          }
+        });
+
+        if (!p) {
+          return res.status(400).json({
+            msg: "Cannot post news with this category",
+          });
         }
 
         status = "Accepted";
@@ -106,7 +125,14 @@ route.post(
 
 route.put("/:id", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id)
+      .select("-password")
+      .populate({
+        path: "categoroes_permissions",
+        populate: {
+          path: "category",
+        },
+      });
 
     if (!user) {
       return res.status(400).json({ msg: "User not found" });
@@ -127,6 +153,18 @@ route.put("/:id", auth, async (req, res) => {
 
     if (!p) {
       return res.status(400).json({ msg: "No Permission to access" });
+    }
+
+    user.categories_permissions.forEach((cat_p) => {
+      if (cat_p.category.value === category) {
+        p === true;
+      }
+    });
+
+    if (!p) {
+      return res.status(400).json({
+        msg: "Cannot update news with this category",
+      });
     }
 
     const news = await News.findById(req.params.id);
@@ -157,7 +195,14 @@ route.delete("/:id", auth, async (req, res) => {
   }
 
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id)
+      .select("-password")
+      .populate({
+        path: "categoroes_permissions",
+        populate: {
+          path: "category",
+        },
+      });
 
     if (!user) {
       return res.status(400).json({ msg: "User not found" });
@@ -178,6 +223,18 @@ route.delete("/:id", auth, async (req, res) => {
 
     if (!p) {
       return res.status(400).json({ msg: "No Permission to access" });
+    }
+
+    user.categories_permissions.forEach((cat_p) => {
+      if (cat_p.category.value === category) {
+        p === true;
+      }
+    });
+
+    if (!p) {
+      return res.status(400).json({
+        msg: "Cannot delete news with this category",
+      });
     }
 
     await News.findByIdAndDelete(req.params.id);
