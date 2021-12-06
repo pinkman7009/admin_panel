@@ -53,6 +53,13 @@ router.post(
 
       user.password = await bcrypt.hash(password, salt);
 
+      var ip =
+        req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
+
+      console.log(ip);
+
+      user.ip = ip;
+
       await user.save();
 
       const payload = {
