@@ -43,16 +43,20 @@ route.post(
         return res.status(400).json({ msg: "User Blocked" });
       }
 
+      var ip =
+        req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
+
+      console.log(ip);
+
+      user.ip = ip;
+
+      await user.save();
+
       const payload = {
         user: {
           id: user.id,
         },
       };
-
-      var ip =
-        req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
-
-      console.log(ip);
 
       jwt.sign(
         payload,
