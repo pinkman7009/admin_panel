@@ -19,7 +19,7 @@ const Mainscreen = () => {
   const adminLinks = [
     {
       title: "Dashboard",
-      route: "/dashboard",
+      route: "/",
     },
   ];
 

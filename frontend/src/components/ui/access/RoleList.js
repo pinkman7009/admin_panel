@@ -33,6 +33,7 @@ const RoleList = ({ roles }) => {
           <th>Last Name</th>
           <th>Email</th>
           <th>Role Title</th>
+          <th>IP</th>
           <th>Options</th>
         </tr>
       </thead>
@@ -52,6 +53,8 @@ const RoleList = ({ roles }) => {
                   ? "Admin"
                   : "Not Admin"}
               </td>
+              <td>{item.ip ? item.ip : "No IP"}</td>
+
               <td>
                 <div className="button-group">
                   <ViewButton

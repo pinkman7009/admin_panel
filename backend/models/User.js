@@ -34,6 +34,14 @@ const UserSchema = mongoose.Schema({
     default: [],
     required: false,
   },
+  categories_permissions: [
+    {
+      category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categories",
+      },
+    },
+  ],
   blockedStatus: {
     type: Boolean,
     required: true,
@@ -45,7 +53,6 @@ const UserSchema = mongoose.Schema({
   },
   ip: {
     type: String,
-    required: true,
   },
 });
 

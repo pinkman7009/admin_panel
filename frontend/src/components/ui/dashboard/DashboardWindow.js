@@ -30,7 +30,7 @@ const DashboardWindow = () => {
       <TopNavbar />
       <div className="main-window-right-bottom">
         <Routes>
-          <Route exact path="/dashboard" element={<DashboardSection />} />
+          <Route exact path="/" element={<DashboardSection />} />
           <Route exact path="/access" element={<ManageAccessSection />} />
           <Route exact path="/categories" element={<CategoriesSection />} />
           <Route

@@ -11,6 +11,7 @@
   z-index: 2;
   padding: 0 !important;
   margin: 0 !important;
+  font-size: 0.9rem;
 }
 .active .link-group {
   background: #1d2aa7;

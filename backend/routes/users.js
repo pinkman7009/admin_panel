@@ -30,6 +30,7 @@ router.post(
       permissions,
       roleType,
       phone,
+      categories_permissions,
     } = req.body;
     try {
       let user = await User.findOne({ email });
@@ -48,6 +49,10 @@ router.post(
         roleType,
         phone,
       });
+
+      if (permissions?.includes("CATEGORIES")) {
+        user.categories_permissions = categories_permissions;
+      }
 
       const salt = await bcrypt.genSalt(10);
 
@@ -114,6 +119,9 @@ router.put("/:id", auth, async (req, res) => {
     user.permissions = req.body.permissions || user.permissions;
     user.phone = req.body.phone || user.phone;
     user.roleTitle = req.body.roleTitle || user.roleTitle;
+    user.categories_permissions =
+      req.body.categories_permissions || user.categories_permissions;
+    console.log(req.body.categories_permissions);
 
     await user.save();
 
