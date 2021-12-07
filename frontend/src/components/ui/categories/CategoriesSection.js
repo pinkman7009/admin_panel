@@ -1,47 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../../../styles/Categories.css";
 import "../../../styles/Modal.css";
 import CategoriesList from "./CategoriesList";
 import AddButton from "../buttons/AddButton";
-import SaveButton from "../buttons/SaveButton";
 import { useDispatch, useSelector } from "react-redux";
-import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
-import {
-  addCategories,
-  fetchCategories,
-} from "../../../actions/categoryActions";
+import { fetchCategories } from "../../../actions/categoryActions";
 import { useNavigate } from "react-router-dom";
-
-const ModalBody = () => {
-  const dispatch = useDispatch();
-
-  const [form, setForm] = useState({});
-
-  const { value } = form;
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(addCategories(form));
-    dispatch({ type: CLOSE_MODAL });
-  };
-
-  return (
-    <>
-      <input
-        name="value"
-        type="text"
-        placeholder="Category name"
-        className="modal-input"
-        value={value}
-        onChange={handleChange}
-      />
-      <SaveButton handleClick={handleSubmit} />
-    </>
-  );
-};
 
 const CategoriesSection = () => {
   const dispatch = useDispatch();
@@ -56,6 +20,12 @@ const CategoriesSection = () => {
   const handleClick = () => {
     navigate("/categories/modal");
   };
+
+  const updatedCategories = state.categories?.filter((item) =>
+    state.userDetails?.categories_permissions.some(
+      (ele) => ele.category === item._id
+    )
+  );
   return (
     <div className="categories-container">
       <div className="categories-list">
@@ -64,7 +34,7 @@ const CategoriesSection = () => {
           <AddButton resource="Category" handleClick={handleClick} />
         </div>
 
-        {state.categories && <CategoriesList categories={state.categories} />}
+        {updatedCategories && <CategoriesList categories={updatedCategories} />}
       </div>
     </div>
   );

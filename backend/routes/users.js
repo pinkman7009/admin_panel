@@ -58,13 +58,6 @@ router.post(
 
       user.password = await bcrypt.hash(password, salt);
 
-      var ip =
-        req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
-
-      console.log(ip);
-
-      user.ip = ip;
-
       await user.save();
 
       const payload = {
@@ -126,6 +119,9 @@ router.put("/:id", auth, async (req, res) => {
     user.permissions = req.body.permissions || user.permissions;
     user.phone = req.body.phone || user.phone;
     user.roleTitle = req.body.roleTitle || user.roleTitle;
+    user.categories_permissions =
+      req.body.categories_permissions || user.categories_permissions;
+    console.log(req.body.categories_permissions);
 
     await user.save();
 
