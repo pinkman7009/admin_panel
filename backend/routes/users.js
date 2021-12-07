@@ -50,9 +50,8 @@ router.post(
         phone,
       });
 
-      if (permissions.includes("CATEGORIES")) {
+      if (permissions?.includes("CATEGORIES")) {
         user.categories_permissions = categories_permissions;
-        console.log(user.categories_permissions);
       }
 
       const salt = await bcrypt.genSalt(10);
