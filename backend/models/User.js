@@ -53,7 +53,6 @@ const UserSchema = mongoose.Schema({
   },
   ip: {
     type: String,
-    required: true,
   },
 });
 
