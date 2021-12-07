@@ -48,6 +48,7 @@ const CustomerDetailsList = ({ customers }) => {
           <th>Last Name</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>IP</th>
           <th>Options</th>
         </tr>
       </thead>
@@ -60,7 +61,8 @@ const CustomerDetailsList = ({ customers }) => {
               <td>{item.firstname}</td>
               <td>{item.lastname}</td>
               <td>{item.email}</td>
-              <td>{item.phone}</td>
+              <td>{item.phone ? item.phone : "No phone"}</td>
+              <td>{item.ip ? item.ip : "No IP"}</td>
               <td>
                 <div className="button-group">
                   <ViewButton

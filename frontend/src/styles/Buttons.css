@@ -9,6 +9,8 @@
   font-weight: bold;
   border: none;
   cursor: pointer;
+  font-size: 0.8rem !important;
+
   min-width: 150px;
 }
 .save-button {
@@ -24,6 +26,7 @@
   cursor: pointer;
   min-width: 100px;
   margin: 1rem;
+  font-size: 0.8rem !important;
 }
 .view-button {
   background: #1d2aa7;
@@ -40,6 +43,7 @@
   min-width: 100px;
   margin: 1rem 0;
   margin-right: 1rem;
+  font-size: 0.8rem !important;
 }
 .delete-button {
   background: red;
@@ -55,6 +59,8 @@
   cursor: pointer;
   min-width: 100px;
   margin: 1rem 0;
+  font-size: 0.8rem !important;
+
   margin-right: 1rem;
 }
 .add-button svg {
