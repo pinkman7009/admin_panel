@@ -23,7 +23,13 @@ const UserNewsList = () => {
     if (!state.news) dispatch(getNews());
   }, []);
 
-  const userNews = state.news?.filter((item) => item.user.role === 1);
+  let userNews;
+
+  if (state.userDetails.isSuperAdmin === true) {
+    userNews = state.news;
+  } else {
+    userNews = state.news?.filter((item) => item.user.role === 1);
+  }
 
   const pendingNews = userNews?.filter((item) => item.status === "Pending");
   const approvedNews = userNews?.filter((item) => item.status === "Accepted");

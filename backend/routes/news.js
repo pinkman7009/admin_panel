@@ -53,7 +53,7 @@ route.post(
       const user = await User.findById(req.user.id)
         .select("-password")
         .populate({
-          path: "categoroes_permissions",
+          path: "categories_permissions",
           populate: {
             path: "category",
           },
@@ -96,7 +96,7 @@ route.post(
           });
         }
 
-        status = "Accepted";
+        // status = "Accepted";
       }
 
       const news = new News({
@@ -128,7 +128,7 @@ route.put("/:id", auth, async (req, res) => {
     const user = await User.findById(req.user.id)
       .select("-password")
       .populate({
-        path: "categoroes_permissions",
+        path: "categories_permissions",
         populate: {
           path: "category",
         },
@@ -156,7 +156,7 @@ route.put("/:id", auth, async (req, res) => {
     }
 
     user.categories_permissions.forEach((cat_p) => {
-      if (cat_p.category.value === category) {
+      if (cat_p.category.value === req.body.category) {
         p === true;
       }
     });
@@ -167,7 +167,13 @@ route.put("/:id", auth, async (req, res) => {
       });
     }
 
-    const news = await News.findById(req.params.id);
+    const news = await News.findById(req.params.id).populate("user");
+
+    if (!news) {
+      return res.status(404).json({
+        msg: "News with this ID not found",
+      });
+    }
 
     news.title = req.body.title || news.title;
     news.desc = req.body.desc || news.desc;
@@ -177,7 +183,36 @@ route.put("/:id", auth, async (req, res) => {
     news.state = req.body.state || news.state;
     news.category = req.body.category || news.category;
     news.author = req.body.author || news.author;
-    news.status = req.body.status || news.status;
+
+    if (req.body.status) {
+      let p = false;
+
+      user.permissions.forEach((permission) => {
+        if (permission === "NEWS_APPROVAL") {
+          p = true;
+        }
+      });
+
+      if (!p) {
+        return res.status(400).json({ msg: "No Permission to access" });
+      }
+
+      if (news.user.role === 0) {
+        if (user.isSuperAdmin) news.status = req.body.status || news.status;
+        else {
+          return res.status(401).json({
+            msg: "Only super admin can update news status of Admins",
+          });
+        }
+      } else {
+        if (user.role === 0) news.status = req.body.status || news.status;
+        else {
+          return res.status(401).json({
+            msg: "Cannot update news status",
+          });
+        }
+      }
+    }
 
     await news.save();
 
@@ -198,7 +233,7 @@ route.delete("/:id", auth, async (req, res) => {
     const user = await User.findById(req.user.id)
       .select("-password")
       .populate({
-        path: "categoroes_permissions",
+        path: "categories_permissions",
         populate: {
           path: "category",
         },
@@ -226,7 +261,7 @@ route.delete("/:id", auth, async (req, res) => {
     }
 
     user.categories_permissions.forEach((cat_p) => {
-      if (cat_p.category.value === category) {
+      if (cat_p.category.value === req.params.id) {
         p === true;
       }
     });
