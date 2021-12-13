@@ -14,8 +14,6 @@ const Mainscreen = () => {
     if (!state.userDetails) dispatch(getUserDetails());
   }, []);
 
-  console.log(state);
-
   const adminLinks = [
     {
       title: "Dashboard",
@@ -40,26 +38,25 @@ const Mainscreen = () => {
       route: "/categories",
     });
   if (state.userDetails?.permissions.includes("NEWS"))
-    adminLinks.push(
-      {
-        title: "User News",
-        route: "/usernews",
-      },
-      {
-        title: "News",
-        route: "/news",
-      }
-    );
+    adminLinks.push({
+      title: "News",
+      route: "/news",
+    });
+  if (state.userDetails?.permissions.includes("NEWS_APPROVAL"))
+    adminLinks.push({
+      title: "News Approval",
+      route: "/usernews",
+    });
   if (state.userDetails?.permissions.includes("MEMBERSHIP_PLAN"))
     adminLinks.push({
       title: "Memberships",
       route: "/memberships",
     });
-
-  adminLinks.push({
-    title: "Settings",
-    route: "/settings",
-  });
+  if (state.userDetails?.permissions.includes("SETTINGS"))
+    adminLinks.push({
+      title: "Settings",
+      route: "/settings",
+    });
 
   return (
     <div className="main-window">
