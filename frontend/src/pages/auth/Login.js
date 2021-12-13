@@ -24,7 +24,7 @@ const Login = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(login(form));
-    navigate("/dashboard", { replace: false });
+    navigate("/", { replace: false });
   };
 
   return (
