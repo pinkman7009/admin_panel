@@ -31,6 +31,12 @@ const UserNewsList = () => {
     userNews = state.news?.filter((item) => item.user.role === 1);
   }
 
+  userNews = userNews.filter((item) =>
+    state.userDetails?.categories_permissions.some(
+      (eachCategory) => eachCategory.category === item.category._id
+    )
+  );
+
   const pendingNews = userNews?.filter((item) => item.status === "Pending");
   const approvedNews = userNews?.filter((item) => item.status === "Accepted");
   const deniedNews = userNews?.filter((item) => item.status === "Denied");
