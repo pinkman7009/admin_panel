@@ -19,18 +19,11 @@ const NewsList = () => {
     if (!state.userDetails) dispatch(getUserDetails());
   }, []);
 
-  let adminNews = state.news?.filter((item) => item.user.role === 0);
-
-  console.log(adminNews);
-
-  adminNews = adminNews.filter((item) =>
+  let adminNews = state.news?.filter((item) =>
     state.userDetails?.categories_permissions.some(
       (eachCategory) => eachCategory.category === item.category._id
     )
   );
-
-  console.log({ news: state.news });
-  console.log(adminNews);
 
   const handleDelete = (item) => {
     dispatch({
@@ -45,7 +38,7 @@ const NewsList = () => {
     });
   };
 
-  return (
+  return adminNews?.length > 0 ? (
     <table>
       <thead>
         <tr>
@@ -94,7 +87,7 @@ const NewsList = () => {
         })}
       </tbody>
     </table>
-  );
+  ) : null;
 };
 
 export default NewsList;

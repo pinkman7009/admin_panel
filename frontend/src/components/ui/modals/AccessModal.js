@@ -35,7 +35,8 @@ const AccessModal = () => {
       let permissions = userData?.data.permissions;
 
       if (
-        userData?.data.categories_permissions.length !== state.categories.length
+        userData?.data.categories_permissions?.length !==
+        state.categories.length
       ) {
         permissions = permissions.filter((item) => item !== "CATEGORIES");
       }
