@@ -16,7 +16,7 @@ const LeftNavbar = ({ links }) => {
     else if (title === "Manage Role") return <MdOutlineAccessibilityNew />;
     else if (title === "Categories") return <MdFormatListBulleted />;
     else if (title === "Customer Details") return <FaUserEdit />;
-    else if (title === "News" || title === "User News")
+    else if (title === "News" || title === "News Approval")
       return <FaRegNewspaper />;
     else if (title === "Memberships") return <MdCardMembership />;
     else if (title === "Settings") return <IoSettings />;
