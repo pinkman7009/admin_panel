@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import "../../../styles/News.css";
-import ViewButton from "../buttons/ViewButton";
-import DeleteButton from "../buttons/DeleteButton";
 import { useDispatch, useSelector } from "react-redux";
 import { getNews, deleteNews } from "../../../actions/newsAction";
 import { OPEN_MODAL, CLOSE_MODAL } from "../../../types/modalTypes";
 import { useNavigate } from "react-router-dom";
+import { getUserDetails } from "../../../actions/loginAction";
+import ViewButton from "../buttons/ViewButton";
+import DeleteButton from "../buttons/DeleteButton";
 
 const NewsList = () => {
   const dispatch = useDispatch();
@@ -15,10 +16,21 @@ const NewsList = () => {
 
   useEffect(() => {
     if (!state.news) dispatch(getNews());
+    if (!state.userDetails) dispatch(getUserDetails());
   }, []);
 
+  let adminNews = state.news?.filter((item) => item.user.role === 0);
+
+  console.log(adminNews);
+
+  adminNews = adminNews.filter((item) =>
+    state.userDetails?.categories_permissions.some(
+      (eachCategory) => eachCategory.category === item.category._id
+    )
+  );
+
   console.log({ news: state.news });
-  const adminNews = state.news?.filter((item) => item.user.role === 0);
+  console.log(adminNews);
 
   const handleDelete = (item) => {
     dispatch({
