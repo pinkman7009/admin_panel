@@ -56,6 +56,7 @@ const NewsList = () => {
           <th>Country</th>
           <th>State</th>
           <th>City</th>
+          <th>Status</th>
           <th>Options</th>
         </tr>
       </thead>
@@ -71,6 +72,7 @@ const NewsList = () => {
               <td>{item.country}</td>
               <td>{item.state}</td>
               <td>{item.city}</td>
+              <td>{item.status}</td>
               <td>
                 <div className="button-group">
                   <ViewButton

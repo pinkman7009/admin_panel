@@ -30,8 +30,16 @@ const AccessModal = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const userData = await dispatch(getUserById(params.id));
-      setPermissions(userData?.data.permissions);
       setCategories_permissions(userData?.data.categories_permissions);
+
+      let permissions = userData?.data.permissions;
+
+      if (
+        userData?.data.categories_permissions.length !== state.categories.length
+      ) {
+        permissions = permissions.filter((item) => item !== "CATEGORIES");
+      }
+      setPermissions(permissions);
       setForm(userData?.data);
     };
 
@@ -57,20 +65,22 @@ const AccessModal = () => {
   };
 
   const handleCategoryPermissions = (e) => {
-    if (
-      categories_permissions.some((item) => item.category === e.target.value)
-    ) {
-      const updatedCategoriesPermissions = categories_permissions.filter(
-        (item) => {
-          return item.category !== e.target.value;
-        }
-      );
-      setCategories_permissions(updatedCategoriesPermissions);
-    } else
-      setCategories_permissions([
-        ...categories_permissions,
-        { category: e.target.value },
-      ]);
+    if (!permissions.includes("CATEGORIES")) {
+      if (
+        categories_permissions.some((item) => item.category === e.target.value)
+      ) {
+        const updatedCategoriesPermissions = categories_permissions.filter(
+          (item) => {
+            return item.category !== e.target.value;
+          }
+        );
+        setCategories_permissions(updatedCategoriesPermissions);
+      } else
+        setCategories_permissions([
+          ...categories_permissions,
+          { category: e.target.value },
+        ]);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -78,12 +88,21 @@ const AccessModal = () => {
     form.role = 0;
     form.permissions = permissions;
     form.categories_permissions = categories_permissions;
+
+    if (permissions.includes("CATEGORIES")) {
+      const cpermissions = state.categories.map((item) => {
+        return {
+          category: item._id,
+        };
+      });
+      form.categories_permissions = cpermissions;
+    }
+
     if (categories_permissions.length > 0) form.permissions.push("CATEGORIES");
-    console.log({ form });
+    // console.log({ form });
     if (updateData === false) {
       dispatch(addRole(form));
     } else {
-      // console.log({ form });
       dispatch(updateRole(form, params.id));
     }
     dispatch({ type: CLOSE_MODAL });
@@ -156,6 +175,7 @@ const AccessModal = () => {
                 type="checkbox"
                 value="MANAGE_ACCESS"
                 onChange={handlePermissions}
+                checked={permissions.includes("MANAGE_ACCESS")}
               />
             </div>
             <div className="checkbox-group">
@@ -164,6 +184,7 @@ const AccessModal = () => {
                 type="checkbox"
                 value="CATEGORIES"
                 onChange={handlePermissions}
+                checked={permissions.includes("CATEGORIES")}
               />
             </div>
             {state.categories?.map((category) => {
@@ -193,6 +214,16 @@ const AccessModal = () => {
                 type="checkbox"
                 value="NEWS"
                 onChange={handlePermissions}
+                checked={permissions.includes("NEWS")}
+              />
+            </div>
+            <div className="checkbox-group">
+              <label htmlFor="">News Approval</label>
+              <input
+                type="checkbox"
+                value="NEWS_APPROVAL"
+                onChange={handlePermissions}
+                checked={permissions.includes("NEWS_APPROVAL")}
               />
             </div>
             <div className="checkbox-group">
@@ -201,6 +232,7 @@ const AccessModal = () => {
                 type="checkbox"
                 value="CUSTOMER_DETAILS"
                 onChange={handlePermissions}
+                checked={permissions.includes("CUSTOMER_DETAILS")}
               />
             </div>
             <div className="checkbox-group">
@@ -209,6 +241,7 @@ const AccessModal = () => {
                 type="checkbox"
                 value="MEMBERSHIP_PLAN"
                 onChange={handlePermissions}
+                checked={permissions.includes("MEMBERSHIP_PLAN")}
               />
             </div>
             <div className="checkbox-group">
@@ -217,6 +250,7 @@ const AccessModal = () => {
                 type="checkbox"
                 value="SETTINGS"
                 onChange={handlePermissions}
+                checked={permissions.includes("SETTINGS")}
               />
             </div>
           </div>

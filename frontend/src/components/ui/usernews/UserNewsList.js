@@ -23,7 +23,13 @@ const UserNewsList = () => {
     if (!state.news) dispatch(getNews());
   }, []);
 
-  let userNews = state.news?.filter((item) => item.user.role === 1);
+  let userNews;
+
+  if (state.userDetails.isSuperAdmin === true) {
+    userNews = state.news;
+  } else {
+    userNews = state.news?.filter((item) => item.user.role === 1);
+  }
 
   userNews = userNews.filter((item) =>
     state.userDetails?.categories_permissions.some(
