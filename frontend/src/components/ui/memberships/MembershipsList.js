@@ -30,7 +30,8 @@ const MembershipsList = ({ memberships }) => {
         <tr>
           <th>ID</th>
           <th>Membership Name</th>
-          <th>Price</th>
+          <th>Monthly Price</th>
+          <th>Annually Price</th>
           <th>Create Post Limit</th>
           <th>View Post</th>
           <th>Can Comment</th>
@@ -45,7 +46,8 @@ const MembershipsList = ({ memberships }) => {
             <tr key={item._id}>
               <td>{index + 1}</td>
               <td>{item.name}</td>
-              <td>{item.price}</td>
+              <td>{item.monthly_price}</td>
+              <td>{item.annually_price}</td>
               <td>{item.createPostLimit}</td>
               <td>{item.viewPost ? <FaCheck /> : <FaTimes />}</td>
               <td>{item.canComment ? <FaCheck /> : <FaTimes />}</td>
