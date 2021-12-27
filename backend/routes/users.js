@@ -155,6 +155,30 @@ router.put("/block/:id", auth, async (req, res) => {
   }
 });
 
+//follow following
+router.put("follow/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(400).json({ msg: "No user found" });
+    }
+
+    const newfollowing = req.body.following;
+
+    const otheruser = await User.findById(newfollowing);
+
+    otheruser.followers = otheruser.followers.push(user._id);
+
+    user.following = user.following.push(newfollowing);
+
+    await user.save();
+    await otheruser.save();
+
+    res.status(200).json({ message: "following added" });
+  } catch (error) {}
+});
+
 router.delete("/:id", auth, async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);

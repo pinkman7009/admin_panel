@@ -55,6 +55,22 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  followers: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
+  following: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
   ip: {
     type: String,
   },
