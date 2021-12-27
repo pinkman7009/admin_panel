@@ -149,6 +149,28 @@ tbody tr:nth-child(even) {
   background-color: #e9ecef;
 }
 
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-search-bar,
+.filter-select-box {
+  height: 15px;
+  width: 50%;
+  border-radius: 5px;
+  padding: 0.75rem;
+  background: #fff;
+  color: #000;
+}
+
+.filter-select-box {
+  width: 25%;
+  height: 2rem;
+  padding: 0;
+}
+
 .charts-container {
   display: flex;
   margin: 1rem;
