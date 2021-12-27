@@ -42,6 +42,10 @@ const UserSchema = mongoose.Schema({
       },
     },
   ],
+  membership_plan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Plan",
+  },
   blockedStatus: {
     type: Boolean,
     required: true,

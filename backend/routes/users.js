@@ -121,6 +121,7 @@ router.put("/:id", auth, async (req, res) => {
     user.roleTitle = req.body.roleTitle || user.roleTitle;
     user.categories_permissions =
       req.body.categories_permissions || user.categories_permissions;
+    user.membership_plan = req.body.membership_plan || user.membership_plan;
     console.log(req.body.categories_permissions);
 
     await user.save();
