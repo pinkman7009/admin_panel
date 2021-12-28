@@ -66,6 +66,12 @@ const CustomerDetailsList = ({ customers }) => {
               <td>
                 <div className="button-group">
                   <ViewButton
+                    text="More"
+                    handleClick={() =>
+                      navigate(`/customerdetails/view/${item._id}`)
+                    }
+                  />
+                  <ViewButton
                     text="Edit"
                     handleClick={() =>
                       navigate(`/customerdetails/modal/${item._id}`)

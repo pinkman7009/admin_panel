@@ -73,6 +73,7 @@ route.put("/:id", auth, async (req, res) => {
     let channel = await Channel.findById(req.params.id);
 
     channel.name = req.body.name || channel.name;
+    channel.subscribers = req.body.subscribers || channel.subscribers;
 
     // If video is uploaded
     if (req.body.video) {

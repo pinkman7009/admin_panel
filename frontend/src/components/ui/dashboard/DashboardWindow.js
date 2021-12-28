@@ -17,6 +17,7 @@ import NewsModal from "../modals/NewsModal";
 import ViewNewsModal from "../modals/ViewNewsModal";
 import ViewUserNewsModal from "../modals/ViewUserNewsModal";
 import CustomerDetailsModal from "../modals/CustomerDetailsModal";
+import ViewCustomerDetailsModal from "../modals/ViewCustomerDetailsModal";
 
 import { useDispatch, useSelector } from "react-redux";
 import MembershipsModal from "../modals/MembershipsModal";
@@ -69,6 +70,11 @@ const DashboardWindow = () => {
             exact
             path="/usernews/view/:id"
             element={<ViewUserNewsModal />}
+          />
+          <Route
+            exact
+            path="/customerdetails/view/:id"
+            element={<ViewCustomerDetailsModal />}
           />
           <Route
             exact
