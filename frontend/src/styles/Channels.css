@@ -1,0 +1,18 @@
+.channels-container {
+  padding: 1rem;
+}
+.channels-list {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.channels-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+th {
+  background: #0f1975;
+  color: rgb(236, 220, 220);
+  width: 20% !important;
+}

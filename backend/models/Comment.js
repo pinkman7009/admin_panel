@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 
-const ChannelSchema = mongoose.Schema({
-  name: {
+const CommentSchema = mongoose.Schema({
+  text: {
     type: String,
     required: true,
-  },
-  videos: {
-    type: [String],
-  },
-  subscribers: {
-    type: [String],
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -21,4 +15,4 @@ const ChannelSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Channel", ChannelSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

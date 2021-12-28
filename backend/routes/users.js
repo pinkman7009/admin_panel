@@ -122,6 +122,8 @@ router.put("/:id", auth, async (req, res) => {
     user.categories_permissions =
       req.body.categories_permissions || user.categories_permissions;
     user.membership_plan = req.body.membership_plan || user.membership_plan;
+    user.linkedin = req.body.linkedin || user.linkedin;
+    user.bio = req.body.bio || user.bio;
 
     await user.save();
 
