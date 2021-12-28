@@ -87,7 +87,7 @@ router.post(
 // GET user by ID
 router.get("/:id", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate("membership_plan");
 
     if (!user) {
       res.status(404).json({ message: "No user found" });

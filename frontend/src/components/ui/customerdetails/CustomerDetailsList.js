@@ -95,34 +95,40 @@ const CustomerDetailsList = ({ customers }) => {
           </tr>
         </thead>
 
-        <tbody>
-          {customers.map((item, index) => {
-            return (
-              <tr>
-                <td>{index + 1}</td>
-                <td>{item.firstname}</td>
-                <td>{item.lastname}</td>
-                <td>{item.email}</td>
-                <td>{item.phone ? item.phone : "No phone"}</td>
-                <td>{item.ip ? item.ip : "No IP"}</td>
-                <td>
+      <tbody>
+        {customers.map((item, index) => {
+          return (
+            <tr>
+              <td>{index + 1}</td>
+              <td>{item.firstname}</td>
+              <td>{item.lastname}</td>
+              <td>{item.email}</td>
+              <td>{item.phone ? item.phone : "No phone"}</td>
+              <td>{item.ip ? item.ip : "No IP"}</td>
+              <td>
                   {item.membership_plan
                     ? item.membership_plan.name
                     : "No membership"}
-                </td>
-                <td>
-                  <div className="button-group">
-                    <ViewButton
-                      text="Edit"
-                      handleClick={() =>
-                        navigate(`/customerdetails/modal/${item._id}`)
-                      }
-                    />
-                    <DeleteButton
-                      text="Delete"
-                      handleClick={() => handleDelete(item)}
-                    />
-                    {item.blockedStatus ? (
+              </td>
+              <td>
+                <div className="button-group">
+                  <ViewButton
+                    text="More"
+                    handleClick={() =>
+                      navigate(`/customerdetails/view/${item._id}`)
+                    }
+                  />
+                  <ViewButton
+                    text="Edit"
+                    handleClick={() =>
+                      navigate(`/customerdetails/modal/${item._id}`)
+                    }
+                  />
+                  <DeleteButton
+                    text="Delete"
+                    handleClick={() => handleDelete(item)}
+                  />
+                              {item.blockedStatus ? (
                       <DeleteButton
                         text="UnBlock"
                         handleClick={() => BlockClick(item)}
@@ -133,6 +139,7 @@ const CustomerDetailsList = ({ customers }) => {
                         handleClick={() => BlockClick(item)}
                       />
                     )}
+
                   </div>
                 </td>
               </tr>
