@@ -24,6 +24,11 @@ route.get("/", auth, async (req, res) => {
 route.get("/userId/:id", auth, async (req, res) => {
   try {
     const channels = await Channel.find({ user: req.params.id });
+
+    if (!channels) {
+      return res.status(400).json({ message: "The user has no channel" });
+    }
+
     res.json(channels);
   } catch (err) {
     console.error(err.message);
