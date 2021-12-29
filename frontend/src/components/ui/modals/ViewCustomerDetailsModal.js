@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { getUserById } from "../../../actions/roleAction";
 import ViewButton from "../buttons/ViewButton";
 import { useNavigate, useParams } from "react-router-dom";
-import { getChannelbyUserId } from "../../../actions/channelAction";
 
 const ViewCustomerDetailsModal = () => {
   const dispatch = useDispatch();
@@ -18,8 +17,8 @@ const ViewCustomerDetailsModal = () => {
   useEffect(async () => {
     const setuser = await dispatch(getUserById(params.id));
     setUser(setuser);
-    const setchannel = await dispatch(getChannelbyUserId(params.id));
-    setChannel(setchannel);
+    // const setchannel = await dispatch(getChannelbyUserId(params.id));
+    // setChannel(setchannel);
   }, []);
 
   console.log(user);
