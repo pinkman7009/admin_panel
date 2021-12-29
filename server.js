@@ -21,6 +21,7 @@ app.use("/api/subcategories", require("./backend/routes/subcategories"));
 app.use("/api/plans", require("./backend/routes/plan"));
 app.use("/api/channels", require("./backend/routes/channels"));
 app.use("/api/manageaccess", require("./backend/routes/manageAccess"));
+app.use("/api/settings", require("./backend/routes/settings"));
 
 const PORT = process.env.PORT || 5000;
 
