@@ -5,7 +5,6 @@ import { roleReducer } from "./roleReducer";
 import { newsReducer } from "./newsReducer";
 import { categoryReducer } from "./categoryReducers";
 import { membershipsReducer } from "./membershipsReducer";
-import { channelReducer } from "./channelReducers";
 
 const reducers = combineReducers({
   modal: modalReducer,
@@ -15,7 +14,6 @@ const reducers = combineReducers({
   news: newsReducer,
   categories: categoryReducer,
   memberships: membershipsReducer,
-  channel: channelReducer,
 });
 
 export default reducers;
