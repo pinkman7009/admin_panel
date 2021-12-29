@@ -81,6 +81,12 @@ const UserSchema = mongoose.Schema({
   ip: {
     type: String,
   },
+  viewAccess: {
+    type: Boolean,
+  },
+  editAccess: {
+    type: Boolean,
+  },
   isSuperAdmin: {
     type: Boolean,
     default: false,

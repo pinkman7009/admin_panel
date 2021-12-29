@@ -125,6 +125,13 @@ router.put("/:id", auth, async (req, res) => {
     user.linkedin = req.body.linkedin || user.linkedin;
     user.bio = req.body.bio || user.bio;
 
+    if (req.body.viewAccess !== null && req.body.viewAccess !== undefined) {
+      user.viewAccess = req.body.viewAccess;
+    }
+    if (req.body.editAccess !== null && req.body.editAccess !== undefined) {
+      user.editAccess = req.body.editAccess;
+    }
+
     await user.save();
 
     res.status(200).json({ msg: "User Updated" });

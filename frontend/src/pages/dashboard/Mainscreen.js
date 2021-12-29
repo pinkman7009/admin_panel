@@ -19,14 +19,6 @@ const Mainscreen = () => {
       title: "Dashboard",
       route: "/",
     },
-    {
-      title: "Channels",
-      route: "/channels",
-    },
-    {
-      title: "Ratings",
-      route: "/ratings",
-    },
   ];
 
   if (state.userDetails?.permissions.includes("CUSTOMER_DETAILS"))
@@ -54,6 +46,16 @@ const Mainscreen = () => {
     adminLinks.push({
       title: "News Approval",
       route: "/usernews",
+    });
+  if (state.userDetails?.permissions.includes("RATINGS"))
+    adminLinks.push({
+      title: "Ratings",
+      route: "/ratings",
+    });
+  if (state.userDetails?.permissions.includes("CHANNELS"))
+    adminLinks.push({
+      title: "Channels",
+      route: "/channels",
     });
   if (state.userDetails?.permissions.includes("MEMBERSHIP_PLAN"))
     adminLinks.push({
