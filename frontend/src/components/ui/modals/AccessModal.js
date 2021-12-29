@@ -56,6 +56,10 @@ const AccessModal = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleCheckboxChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.checked });
+  };
+
   const handlePermissions = (e) => {
     if (permissions.includes(e.target.value)) {
       const updatedPermissions = permissions.filter(
@@ -110,21 +114,51 @@ const AccessModal = () => {
     navigate("/access");
   };
 
+  const [page, setPage] = useState(1);
   const closeModal = () => {
-    // dispatch({ type: CLOSE_MODAL, payload: null });
-    navigate("/access");
+    if (page === 1) navigate("/access");
+    else setPage(1);
   };
-  return (
-    <div className="modal-container">
-      <div className="modal-wrapper">
-        <ViewButton
-          handleClick={closeModal}
-          text="Go Back"
-          className="go-back-btn"
+
+  const firstPage = () => {
+    return (
+      <>
+        <input
+          name="roleTitle"
+          type="text"
+          placeholder="Enter Role Title"
+          className="modal-input"
+          value={roleTitle}
+          onChange={handleChange}
         />
-        <h3 className="modal-title">
-          {updateData === false ? "Add" : "Update"} Role
-        </h3>
+        <div className="admin-access-options">
+          <div className="checkbox-group">
+            <label htmlFor="">View Access</label>
+            <input
+              type="checkbox"
+              name="viewAccess"
+              checked={form.viewAccess}
+              onChange={handleCheckboxChange}
+            />
+          </div>
+          <div className="checkbox-group">
+            <label htmlFor="">Edit Access</label>
+            <input
+              type="checkbox"
+              name="editAccess"
+              checked={form.editAccess}
+              onChange={handleCheckboxChange}
+            />
+          </div>
+        </div>
+        <ViewButton handleClick={() => setPage(2)} text="Next" />
+      </>
+    );
+  };
+
+  const secondPage = () => {
+    return (
+      <>
         <input
           name="firstname"
           type="text"
@@ -159,14 +193,6 @@ const AccessModal = () => {
             onChange={handleChange}
           />
         )}
-        <input
-          name="roleTitle"
-          type="text"
-          placeholder="Enter Role Title"
-          className="modal-input"
-          value={roleTitle}
-          onChange={handleChange}
-        />
 
         {roleType === "0" ? (
           <div className="admin-access-options">
@@ -228,6 +254,24 @@ const AccessModal = () => {
               />
             </div>
             <div className="checkbox-group">
+              <label htmlFor="">Ratings</label>
+              <input
+                type="checkbox"
+                value="RATINGS"
+                onChange={handlePermissions}
+                checked={permissions.includes("RATINGS")}
+              />
+            </div>
+            <div className="checkbox-group">
+              <label htmlFor="">Channels</label>
+              <input
+                type="checkbox"
+                value="CHANNELS"
+                onChange={handlePermissions}
+                checked={permissions.includes("CHANNELS")}
+              />
+            </div>
+            <div className="checkbox-group">
               <label htmlFor="">Customer Details</label>
               <input
                 type="checkbox"
@@ -256,8 +300,22 @@ const AccessModal = () => {
             </div>
           </div>
         ) : null}
-
         <SaveButton handleClick={handleSubmit} />
+      </>
+    );
+  };
+  return (
+    <div className="modal-container">
+      <div className="modal-wrapper">
+        <ViewButton
+          handleClick={closeModal}
+          text="Go Back"
+          className="go-back-btn"
+        />
+        <h3 className="modal-title">
+          {updateData === false ? "Add" : "Update"} Role
+        </h3>
+        {page === 1 ? firstPage() : secondPage()}
       </div>
     </div>
   );

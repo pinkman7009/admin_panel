@@ -174,8 +174,6 @@ const DashboardSection = () => {
           <tbody>
             {latestNews?.map((item, index) => {
               const dt = DateTime.fromISO(item.date);
-              console.log({ date: item.date });
-              console.log({ dt });
               return (
                 <tr key={item._id}>
                   <td>{index + 1}</td>
