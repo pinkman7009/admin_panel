@@ -9,14 +9,18 @@ import {
 } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { FaUserEdit, FaRegNewspaper } from "react-icons/fa";
+import { FiVideo } from "react-icons/fi";
+import { AiTwotoneStar } from "react-icons/ai";
 
 const LeftNavbar = ({ links }) => {
   const iconGroup = (title) => {
     if (title === "Dashboard") return <MdDashboard />;
+    else if (title === "Channels") return <FiVideo />;
+    else if (title === "Ratings") return <AiTwotoneStar />;
     else if (title === "Manage Role") return <MdOutlineAccessibilityNew />;
     else if (title === "Categories") return <MdFormatListBulleted />;
     else if (title === "Customer Details") return <FaUserEdit />;
-    else if (title === "News" || title === "User News")
+    else if (title === "News" || title === "News Approval")
       return <FaRegNewspaper />;
     else if (title === "Memberships") return <MdCardMembership />;
     else if (title === "Settings") return <IoSettings />;

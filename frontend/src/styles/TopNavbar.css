@@ -1,20 +1,21 @@
-.top-nav-container{
-    background: white;
-    width: 100%;
-    height: 3rem;
-    padding: 0.5rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.top-nav-container {
+  background: white;
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.9rem;
 }
 
-.user-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 4rem;
+.user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 4rem;
 }
 
-.user-container svg{
-    margin-right: 1rem;
+.user-container svg {
+  margin-right: 1rem;
 }

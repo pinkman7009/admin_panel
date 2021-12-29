@@ -30,6 +30,7 @@ router.post(
       permissions,
       roleType,
       phone,
+      categories_permissions,
     } = req.body;
     try {
       let user = await User.findOne({ email });
@@ -48,6 +49,10 @@ router.post(
         roleType,
         phone,
       });
+
+      if (permissions?.includes("CATEGORIES")) {
+        user.categories_permissions = categories_permissions;
+      }
 
       const salt = await bcrypt.genSalt(10);
 
@@ -82,7 +87,7 @@ router.post(
 // GET user by ID
 router.get("/:id", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate("membership_plan");
 
     if (!user) {
       res.status(404).json({ message: "No user found" });
@@ -114,6 +119,18 @@ router.put("/:id", auth, async (req, res) => {
     user.permissions = req.body.permissions || user.permissions;
     user.phone = req.body.phone || user.phone;
     user.roleTitle = req.body.roleTitle || user.roleTitle;
+    user.categories_permissions =
+      req.body.categories_permissions || user.categories_permissions;
+    user.membership_plan = req.body.membership_plan || user.membership_plan;
+    user.linkedin = req.body.linkedin || user.linkedin;
+    user.bio = req.body.bio || user.bio;
+
+    if (req.body.viewAccess !== null && req.body.viewAccess !== undefined) {
+      user.viewAccess = req.body.viewAccess;
+    }
+    if (req.body.editAccess !== null && req.body.editAccess !== undefined) {
+      user.editAccess = req.body.editAccess;
+    }
 
     await user.save();
 
@@ -144,6 +161,30 @@ router.put("/block/:id", auth, async (req, res) => {
     console.error(err);
     res.status(500).send("Server Error");
   }
+});
+
+//follow following
+router.put("follow/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(400).json({ msg: "No user found" });
+    }
+
+    const newfollowing = req.body.following;
+
+    const otheruser = await User.findById(newfollowing);
+
+    otheruser.followers = otheruser.followers.push(user._id);
+
+    user.following = user.following.push(newfollowing);
+
+    await user.save();
+    await otheruser.save();
+
+    res.status(200).json({ message: "following added" });
+  } catch (error) {}
 });
 
 router.delete("/:id", auth, async (req, res) => {

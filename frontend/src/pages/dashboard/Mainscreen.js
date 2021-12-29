@@ -14,12 +14,10 @@ const Mainscreen = () => {
     if (!state.userDetails) dispatch(getUserDetails());
   }, []);
 
-  console.log(state);
-
   const adminLinks = [
     {
       title: "Dashboard",
-      route: "/dashboard",
+      route: "/",
     },
   ];
 
@@ -40,26 +38,35 @@ const Mainscreen = () => {
       route: "/categories",
     });
   if (state.userDetails?.permissions.includes("NEWS"))
-    adminLinks.push(
-      {
-        title: "User News",
-        route: "/usernews",
-      },
-      {
-        title: "News",
-        route: "/news",
-      }
-    );
+    adminLinks.push({
+      title: "News",
+      route: "/news",
+    });
+  if (state.userDetails?.permissions.includes("NEWS_APPROVAL"))
+    adminLinks.push({
+      title: "News Approval",
+      route: "/usernews",
+    });
+  if (state.userDetails?.permissions.includes("RATINGS"))
+    adminLinks.push({
+      title: "Ratings",
+      route: "/ratings",
+    });
+  if (state.userDetails?.permissions.includes("CHANNELS"))
+    adminLinks.push({
+      title: "Channels",
+      route: "/channels",
+    });
   if (state.userDetails?.permissions.includes("MEMBERSHIP_PLAN"))
     adminLinks.push({
       title: "Memberships",
       route: "/memberships",
     });
-
-  adminLinks.push({
-    title: "Settings",
-    route: "/settings",
-  });
+  if (state.userDetails?.permissions.includes("SETTINGS"))
+    adminLinks.push({
+      title: "Settings",
+      route: "/settings",
+    });
 
   return (
     <div className="main-window">

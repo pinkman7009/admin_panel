@@ -51,7 +51,7 @@
   position: relative;
 }
 
-.modal-wrapper button:first-child {
+.modal-wrapper .go-back-btn {
   position: absolute;
   right: 20px;
   top: 20px;
@@ -120,6 +120,13 @@
   justify-content: space-between;
   margin: 1rem;
 }
+
+.checkbox-subgroup {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 3rem;
+}
+
 .checkbox-group input {
   height: 20px;
   width: 20px;

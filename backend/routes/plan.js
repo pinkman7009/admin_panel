@@ -30,7 +30,11 @@ route.get("/:id", async (req, res) => {
 route.post(
   "/",
   auth,
-  [body("name").not().isEmpty(), body("price").not().isEmpty()],
+  [
+    body("name").not().isEmpty(),
+    body("monthly_price").not().isEmpty(),
+    body("annually_price").not().isEmpty(),
+  ],
   async (req, res) => {
     const errors = validationResult(req);
 
@@ -40,7 +44,8 @@ route.post(
 
     const {
       name,
-      price,
+      monthly_price,
+      annually_price,
       createPostLimit,
       viewPost,
       canComment,
@@ -77,7 +82,8 @@ route.post(
 
       const plan = new Plan({
         name,
-        price,
+        monthly_price,
+        annually_price,
         viewChannel,
         createChannel,
         editChannel,
@@ -126,7 +132,8 @@ route.put("/:id", auth, async (req, res) => {
     let plans = await Plan.findById(req.params.id);
 
     plans.name = req.body.name || plans.name;
-    plans.price = req.body.price || plans.price;
+    plans.monthly_price = req.body.monthly_price || plans.monthly_price;
+    plans.annually_price = req.body.annually_price || plans.annually_price;
     plans.createPostLimit = req.body.createPostLimit || plans.createPostLimit;
     if (req.body.viewPost !== null) plans.viewPost = req.body.viewPost;
     if (req.body.canComment !== null) plans.canComment = req.body.canComment;

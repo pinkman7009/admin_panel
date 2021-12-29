@@ -29,7 +29,7 @@ const SettingsSection = () => {
           }
           onClick={() => onClick("Private Policy")}
         >
-          Privacy Policy
+          Private Policy
         </button>
         <button
           className={

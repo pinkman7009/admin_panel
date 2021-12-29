@@ -19,8 +19,15 @@ const MembershipsModal = () => {
   const [form, setForm] = useState({});
   const [updateData, setUpdateData] = useState(false);
 
-  const { name, price, createPostLimit, canComment, canDeletePost, viewPost } =
-    form;
+  const {
+    name,
+    monthly_price,
+    annually_price,
+    createPostLimit,
+    canComment,
+    canDeletePost,
+    viewPost,
+  } = form;
 
   useEffect(() => {
     const fetchMembership = async () => {
@@ -57,7 +64,11 @@ const MembershipsModal = () => {
   return (
     <div className="modal-container">
       <div className="modal-wrapper">
-        <ViewButton handleClick={closeModal} text="Go Back" />
+        <ViewButton
+          handleClick={closeModal}
+          text="Go Back"
+          className="go-back-btn"
+        />
         <h3 className="modal-title">
           {updateData === false ? "Add" : "Update"} Memberships
         </h3>
@@ -70,11 +81,19 @@ const MembershipsModal = () => {
           onChange={handleChange}
         />
         <input
-          name="price"
+          name="monthly_price"
           type="number"
-          placeholder="Plan price"
+          placeholder="Plan monthly price"
           className="modal-input"
-          value={price}
+          value={monthly_price}
+          onChange={handleChange}
+        />
+        <input
+          name="annually_price"
+          type="number"
+          placeholder="Plan annually price"
+          className="modal-input"
+          value={annually_price}
           onChange={handleChange}
         />
         <input

@@ -1,0 +1,35 @@
+.formalData {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 2rem auto;
+}
+
+.profileImage {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.profileName {
+  margin: 1rem auto;
+}
+
+.OtherDetails {
+  margin: 1rem auto;
+}
+
+.OtherDetails div {
+  margin: 0.5rem 0rem;
+  display: flex;
+  justify-content: center;
+}
+
+.OtherDetails div h4 {
+  margin: 0 1rem;
+}
+
+.back-button {
+  margin: 2rem;
+}
