@@ -14,7 +14,7 @@ const AccessModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({ firstname: "" });
 
   const [roleType, setRoleType] = useState("0");
   const [updateData, setUpdateData] = useState(false);
