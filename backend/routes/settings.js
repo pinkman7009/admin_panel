@@ -76,7 +76,7 @@ router.put("/:id", auth, async (req, res) => {
     setting.PrivatePolicy = req.body.PrivatePolicy || setting.PrivatePolicy;
     setting.TermsAndConditions =
       req.body.TermsAndConditions || setting.TermsAndConditions;
-    if (req.body.contactUs) {
+    if (req.body.ContactUs) {
       setting.ContactUs.push(req.body.ContactUs);
     }
 
