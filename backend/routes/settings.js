@@ -1,9 +1,10 @@
 const express = require("express");
-const route = express.Router();
+const router = express.Router();
 const Settings = require("../models/Settings");
+const User = require("../models/User");
 const auth = require("../middleware/auth");
 
-route.post("/", auth, async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     let { PrivatePolicy, TermsAndConditions, ContactUs } = req.body;
 
@@ -30,11 +31,6 @@ route.post("/", auth, async (req, res) => {
       return res.status(400).json({ msg: "No Permission to access" });
     }
 
-    let array;
-    array.push(ContactUs);
-
-    ContactUs = array;
-
     const setting = new Settings({
       PrivatePolicy,
       TermsAndConditions,
@@ -45,11 +41,12 @@ route.post("/", auth, async (req, res) => {
 
     res.status(200).json({ message: "Settings Posted" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });
 
-route.put("/:id", auth, async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
 
@@ -91,7 +88,7 @@ route.put("/:id", auth, async (req, res) => {
   }
 });
 
-route.get("/", auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
 
@@ -123,3 +120,5 @@ route.get("/", auth, async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
+module.exports = router;
