@@ -72,6 +72,12 @@ const UserSchema = mongoose.Schema({
       },
     },
   ],
+  linkedin: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
   ip: {
     type: String,
   },

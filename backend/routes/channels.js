@@ -40,6 +40,11 @@ route.get("/userId/:id", auth, async (req, res) => {
 route.get("/:id", auth, async (req, res) => {
   try {
     const channel = await Channel.findById(req.params.id).populate("user");
+
+    if (!channel) {
+      res.status(404).json({ msg: "Channel does not exist" });
+    }
+
     res.json(channel);
   } catch (err) {
     console.error(err.message);
@@ -72,10 +77,44 @@ route.post("/", auth, [body("name").not().isEmpty()], async (req, res) => {
   }
 });
 
+// Subscribe to a channel
+route.put("/subscribe/:id", auth, async (req, res) => {
+  try {
+    let channel = await Channel.findById(req.params.id);
+
+    if (!channel) {
+      res.status(404).json({ msg: "Channel does not exist" });
+    }
+
+    // If user has already subscribed the channel, then unsubscribe
+    if (channel.subscribers?.includes(req.user.id)) {
+      channel.subscribers = channel.subscribers.filter(
+        (item) => item !== req.user.id
+      );
+    } else {
+      // Subscribe the channel
+      channel.subscribers = [...channel.subscribers, req.user.id];
+    }
+
+    await channel.save();
+
+    res
+      .status(200)
+      .json({ msg: "Channel Subscription Updated", data: channel });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: err.message });
+  }
+});
+
 // Update a channel
 route.put("/:id", auth, async (req, res) => {
   try {
     let channel = await Channel.findById(req.params.id);
+
+    if (!channel) {
+      res.status(404).json({ msg: "Channel does not exist" });
+    }
 
     channel.name = req.body.name || channel.name;
     channel.subscribers = req.body.subscribers || channel.subscribers;
