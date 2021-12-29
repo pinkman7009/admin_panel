@@ -42,6 +42,11 @@ const UserSchema = mongoose.Schema({
       },
     },
   ],
+  membership_plan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Plan",
+    default: null,
+  },
   blockedStatus: {
     type: Boolean,
     required: true,
@@ -50,6 +55,28 @@ const UserSchema = mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
+  },
+  followers: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
+  following: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
+  linkedin: {
+    type: String,
+  },
+  bio: {
+    type: String,
   },
   ip: {
     type: String,

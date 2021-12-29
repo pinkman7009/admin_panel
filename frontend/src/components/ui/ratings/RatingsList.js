@@ -9,7 +9,7 @@ import ViewButton from "../buttons/ViewButton";
 import DeleteButton from "../buttons/DeleteButton";
 import FilterBar from "../FilterBar";
 
-const NewsList = () => {
+const RatingsList = () => {
   const filterOptions = [
     {
       title: "Title",
@@ -24,25 +24,19 @@ const NewsList = () => {
       value: "category",
     },
     {
-      title: "Country",
-      value: "country",
+      title: "Likes",
+      value: "likes",
     },
     {
-      title: "State",
-      value: "state",
+      title: "Comments",
+      value: "comments",
     },
     {
-      title: "City",
-      value: "city",
-    },
-
-    {
-      title: "Status",
-      value: "status",
+      title: "Shares",
+      value: "shares",
     },
   ];
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [filterValue, setFilterValue] = useState(filterOptions[0].value);
   const [filterText, setFilterText] = useState("");
@@ -60,24 +54,19 @@ const NewsList = () => {
     )
   );
 
-  const handleDelete = (item) => {
-    dispatch({
-      type: OPEN_MODAL,
-      payload: {
-        title: `delete news ${item.title}`,
-        handleClick: () => {
-          dispatch(deleteNews(item._id));
-          dispatch({ type: CLOSE_MODAL });
-        },
-      },
-    });
-  };
-
   if (filterText) {
     if (filterValue === "category") {
       adminNews = adminNews.filter((item) =>
         item.category.value?.toLowerCase().includes(filterText)
       );
+    } else if (filterValue === "likes") {
+      adminNews = adminNews.filter((item) => item.likes.length == filterText);
+    } else if (filterValue === "comments") {
+      adminNews = adminNews.filter(
+        (item) => item.comments.length == filterText
+      );
+    } else if (filterValue === "shares") {
+      adminNews = adminNews.filter((item) => item.shares == filterText);
     } else {
       adminNews = adminNews.filter((item) =>
         item[filterValue]?.toLowerCase().includes(filterText)
@@ -101,11 +90,9 @@ const NewsList = () => {
             <th>Title</th>
             <th>Author</th>
             <th>Category</th>
-            <th>Country</th>
-            <th>State</th>
-            <th>City</th>
-            <th>Status</th>
-            <th>Options</th>
+            <th>Likes</th>
+            <th>Comments</th>
+            <th>Shares</th>
           </tr>
         </thead>
 
@@ -117,26 +104,9 @@ const NewsList = () => {
                 <td>{item.title}</td>
                 <td>{item.author}</td>
                 <td>{item.category?.value}</td>
-                <td>{item.country}</td>
-                <td>{item.state}</td>
-                <td>{item.city}</td>
-                <td>{item.status}</td>
-                <td>
-                  <div className="button-group">
-                    <ViewButton
-                      text="Edit"
-                      handleClick={() => navigate(`/news/modal/${item._id}`)}
-                    />
-                    <ViewButton
-                      text="View More"
-                      handleClick={() => navigate(`/news/view/${item._id}`)}
-                    />
-                    <DeleteButton
-                      text="Delete"
-                      handleClick={() => handleDelete(item)}
-                    />
-                  </div>
-                </td>
+                <td>{item.likes?.length}</td>
+                <td>{item.comments?.length}</td>
+                <td>{item.shares}</td>
               </tr>
             );
           })}
@@ -146,4 +116,4 @@ const NewsList = () => {
   );
 };
 
-export default NewsList;
+export default RatingsList;

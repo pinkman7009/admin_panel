@@ -8,6 +8,8 @@ import CustomerDetailsSection from "../customerdetails/CustomerDetailsSection";
 import NewsSection from "../news/NewsSection";
 import UserNewsSection from "../usernews/UserNewsSection";
 import MembershipsSection from "../memberships/MembershipsSection";
+import ChannelsSection from "../channels/ChannelsSection";
+import RatingsSection from "../ratings/RatingsSection";
 import SettingsSection from "../settings/SettingsSection";
 import "../../../styles/Dashboard.css";
 import Toast from "../../ui/Toast";
@@ -17,6 +19,7 @@ import NewsModal from "../modals/NewsModal";
 import ViewNewsModal from "../modals/ViewNewsModal";
 import ViewUserNewsModal from "../modals/ViewUserNewsModal";
 import CustomerDetailsModal from "../modals/CustomerDetailsModal";
+import ViewCustomerDetailsModal from "../modals/ViewCustomerDetailsModal";
 
 import { useDispatch, useSelector } from "react-redux";
 import MembershipsModal from "../modals/MembershipsModal";
@@ -41,6 +44,8 @@ const DashboardWindow = () => {
           <Route exact path="/news" element={<NewsSection />} />
           <Route exact path="/usernews" element={<UserNewsSection />} />
           <Route exact path="/memberships" element={<MembershipsSection />} />
+          <Route exact path="/channels" element={<ChannelsSection />} />
+          <Route exact path="/ratings" element={<RatingsSection />} />
           <Route exact path="/settings" element={<SettingsSection />} />
 
           {/* Modals */}
@@ -69,6 +74,11 @@ const DashboardWindow = () => {
             exact
             path="/usernews/view/:id"
             element={<ViewUserNewsModal />}
+          />
+          <Route
+            exact
+            path="/customerdetails/view/:id"
+            element={<ViewCustomerDetailsModal />}
           />
           <Route
             exact

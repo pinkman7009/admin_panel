@@ -87,7 +87,7 @@ router.post(
 // GET user by ID
 router.get("/:id", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate("membership_plan");
 
     if (!user) {
       res.status(404).json({ message: "No user found" });
@@ -121,7 +121,9 @@ router.put("/:id", auth, async (req, res) => {
     user.roleTitle = req.body.roleTitle || user.roleTitle;
     user.categories_permissions =
       req.body.categories_permissions || user.categories_permissions;
-    console.log(req.body.categories_permissions);
+    user.membership_plan = req.body.membership_plan || user.membership_plan;
+    user.linkedin = req.body.linkedin || user.linkedin;
+    user.bio = req.body.bio || user.bio;
 
     await user.save();
 
@@ -152,6 +154,30 @@ router.put("/block/:id", auth, async (req, res) => {
     console.error(err);
     res.status(500).send("Server Error");
   }
+});
+
+//follow following
+router.put("follow/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(400).json({ msg: "No user found" });
+    }
+
+    const newfollowing = req.body.following;
+
+    const otheruser = await User.findById(newfollowing);
+
+    otheruser.followers = otheruser.followers.push(user._id);
+
+    user.following = user.following.push(newfollowing);
+
+    await user.save();
+    await otheruser.save();
+
+    res.status(200).json({ message: "following added" });
+  } catch (error) {}
 });
 
 router.delete("/:id", auth, async (req, res) => {

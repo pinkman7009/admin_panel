@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const route = express.Router();
 const User = require("../models/User");
 const News = require("../models/News");
+const Comment = require("../models/Comment");
 const auth = require("../middleware/auth");
 
 // Get all news
@@ -14,7 +15,19 @@ route.get("/", async (req, res) => {
       })
       .populate("category")
       .populate("user");
-    res.json(news);
+
+    const newsList = news.map((newsItem) => {
+      let likedByUser;
+      if (req.query?.userId)
+        likedByUser = newsItem.likes.includes(req.query?.userId);
+      else likedByUser = false;
+
+      return {
+        ...newsItem._doc,
+        likedByUser,
+      };
+    });
+    res.json(newsList);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
@@ -24,12 +37,16 @@ route.get("/", async (req, res) => {
 // Get news by ID
 route.get("/:id", async (req, res) => {
   try {
-    const news = await News.findById(req.params.id).populate("category");
+    let news = await News.findById(req.params.id).populate("category");
 
     if (!news) {
       res.status(400).json({ message: "News does not exist" });
     }
-    res.json(news);
+    let likedByUser;
+    if (req.query?.userId) likedByUser = news.likes.includes(req.query?.userId);
+    else likedByUser = false;
+
+    res.json({ news, likedByUser });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
@@ -122,6 +139,68 @@ route.post(
     }
   }
 );
+
+// Route for likes
+route.put("/like/:id", auth, async (req, res) => {
+  try {
+    const news = await News.findById(req.params.id);
+
+    if (!news) {
+      return res.status(404).json({
+        msg: "News with this ID not found",
+      });
+    }
+
+    // If user has already liked the news, then dislike
+    if (news.likes?.includes(req.user.id)) {
+      news.likes = news.likes.filter((item) => item !== req.user.id);
+    } else {
+      // Like the news
+      news.likes = [...news.likes, req.user.id];
+    }
+
+    await news.save();
+
+    res.status(200).json({
+      msg: "Likes updated",
+      likesCount: news.likes.length,
+    });
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+// Route for comments
+route.put("/comment/:id", auth, async (req, res) => {
+  try {
+    const news = await News.findById(req.params.id);
+
+    if (!news) {
+      return res.status(404).json({
+        msg: "News with this ID not found",
+      });
+    }
+    // Comment on the news
+
+    req.body.user = req.user.id;
+
+    const comment = await Comment.create(req.body);
+
+    news.comments = [...news.comments, comment];
+
+    await news.save();
+
+    res.status(200).json({
+      msg: "Comment added",
+      comment,
+      commentCount: news.comments.length,
+    });
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).json({ msg: err.message });
+  }
+});
 
 route.put("/:id", auth, async (req, res) => {
   try {

@@ -19,6 +19,14 @@ const Mainscreen = () => {
       title: "Dashboard",
       route: "/",
     },
+    {
+      title: "Channels",
+      route: "/channels",
+    },
+    {
+      title: "Ratings",
+      route: "/ratings",
+    },
   ];
 
   if (state.userDetails?.permissions.includes("CUSTOMER_DETAILS"))

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const CommentSchema = require("./Comment").schema;
 
 const NewsSchema = mongoose.Schema({
   user: {
@@ -27,6 +28,16 @@ const NewsSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Categories",
     required: true,
+  },
+  likes: {
+    type: [String],
+  },
+  comments: {
+    type: [CommentSchema],
+  },
+  shares: {
+    type: Number,
+    default: 0,
   },
   status: {
     type: String,
